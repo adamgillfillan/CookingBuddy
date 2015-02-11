@@ -22,7 +22,7 @@ angular.module('cookingBuddy20App')
 
     $scope.viewRecipe = function(recipe) {
       $http.get('/api/recipes/' + recipe._id).success(function(recipe) {
-        console.log("got the recipe");
+        console.log('got the recipe');
         console.log(recipe);
       });
     };

@@ -4,8 +4,25 @@ angular.module('cookingBuddy20App')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {
-        url: '/',
+        //url: '/',
+        controller: 'MainCtrl',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        abstract: true
+      })
+      .state('main.index', {
+        url: '/',
+        controller: 'MainCtrl',
+        views: {
+            'recipe-content' : { 
+                templateUrl: "app/main/templates/main.index.html"
+            }
+        }
+      })
+      .state('main.view', {
+        url: ':name',
+        controller: 'MainCtrl',
+        views: {
+            'recipe-content' : { templateUrl: "app/main/templates/main.view.html" }
+        }
       });
-  });
+    });

@@ -1,0 +1,15 @@
+header#banner.hero-unit
+  .container
+    h1 Bon Appétit!123
+    p.lead Cook anything with your personal CookingBuddy
+    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+
+.container
+  .row
+    .col-lg-12
+      h1.page-header Recipes:
+      ul.nav.nav-tabs.nav-stacked.col-md-2.col-lg-4.col-sm-6(ng-repeat='recipe in recipes')
+        li
+          a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)')
+            | {{recipe.name}}
+          <img ng-src="{{ recipe.image }}" />
