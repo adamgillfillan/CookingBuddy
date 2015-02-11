@@ -16,4 +16,11 @@ var RecipeSchema = new Schema({
     steps       : [String]
 });
 
+RecipeSchema.statics.isValidName = function (name, callback) {
+    if (name) {
+        return true;
+    }
+    return false;
+};
+
 module.exports = mongoose.model('Recipe', RecipeSchema);

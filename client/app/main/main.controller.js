@@ -2,21 +2,28 @@
 
 angular.module('cookingBuddy20App')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+    $scope.recipes = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    $http.get('/api/recipes').success(function(recipes) {
+      $scope.recipes = recipes;
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
+    $scope.addRecipe = function() {
+      if($scope.newRecipe === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+      $http.post('/api/recipes', { name: $scope.newRecipe });
+      $scope.newRecipe = '';
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.deleteRecipe = function(recipe) {
+      $http.delete('/api/recipes/' + recipe._id);
+    };
+
+    $scope.viewRecipe = function(recipe) {
+      $http.get('/api/recipes/' + recipe._id).success(function(recipe) {
+        console.log("got the recipe");
+        console.log(recipe);
+      });
     };
   });
