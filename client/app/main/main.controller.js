@@ -1,29 +1,50 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.recipes = [];
+  .controller('MainCtrl', function ($scope, recipeService, $location) {
+    $scope.recipeService = recipeService;
+    recipeService.getAllRecipes();
 
-    $http.get('/api/recipes').success(function(recipes) {
-      $scope.recipes = recipes;
-    });
-
-    $scope.addRecipe = function() {
-      if($scope.newRecipe === '') {
-        return;
-      }
-      $http.post('/api/recipes', { name: $scope.newRecipe });
-      $scope.newRecipe = '';
+    $scope.viewRecipe = function (recipe) {
+      recipeService.getRecipe(recipe._id);
+      $location.path('/' + recipe._id);
     };
 
-    $scope.deleteRecipe = function(recipe) {
-      $http.delete('/api/recipes/' + recipe._id);
+    $scope.deleteRecipe = function () {
+      recipeService.deleteRecipe(recipeService.currRecipe._id);
+      $location.path('/');
     };
 
-    $scope.viewRecipe = function(recipe) {
-      $http.get('/api/recipes/' + recipe._id).success(function(recipe) {
-        console.log('got the recipe');
-        console.log(recipe);
-      });
+    $scope.newRecipe = { name: '', picture: '', description: '' };
+
+    $scope.addRecipe = function () {
+      recipeService.createRecipe($scope.newRecipe);
+      $scope.newRecipe = { name: '', picture: '', description: '' };
     };
   });
+
+  //.controller('MainCtrl', function ($scope, $http) {
+    // $scope.recipes = [];
+
+    // $http.get('/api/recipes').success(function(recipes) {
+    //   $scope.recipes = recipes;
+    // });
+
+    // $scope.addRecipe = function() {
+    //   if($scope.newRecipe === '') {
+    //     return;
+    //   }
+    //   $http.post('/api/recipes', { name: $scope.newRecipe });
+    //   $scope.newRecipe = '';
+    // };
+
+    // $scope.deleteRecipe = function(recipe) {
+    //   $http.delete('/api/recipes/' + recipe._id);
+    // };
+
+    // $scope.viewRecipe = function(recipe) {
+    //   $http.get('/api/recipes/' + recipe._id).success(function(recipe) {
+    //     console.log('got the recipe');
+    //     console.log(recipe);
+    //   });
+    // };
