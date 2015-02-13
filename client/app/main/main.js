@@ -13,13 +13,11 @@ angular.module('cookingBuddy20App')
         url: '/',
         controller: 'MainCtrl',
         views: {
-            'recipe-content' : { 
-                templateUrl: "app/main/templates/main.index.html"
-            }
+            'recipe-content' : { templateUrl: "app/main/templates/main.index.html" }
         }
       })
       .state('main.view', {
-        url: ':name',
+        url: '/:name',
         controller: 'MainCtrl',
         views: {
             'recipe-content' : { templateUrl: "app/main/templates/main.view.html" }

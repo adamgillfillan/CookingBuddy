@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .controller('MainCtrl', function ($scope, recipeService, $location) {
+  .controller('MainCtrl', function ($scope, recipeService, $location, $state) {
     $scope.recipeService = recipeService;
     recipeService.getAllRecipes();
 
     $scope.viewRecipe = function (recipe) {
       recipeService.getRecipe(recipe._id);
-      $location.path('/' + recipe._id);
+      $location.path('/' + recipe.name);
+      //$state.go('main.view');
     };
 
     $scope.deleteRecipe = function () {
