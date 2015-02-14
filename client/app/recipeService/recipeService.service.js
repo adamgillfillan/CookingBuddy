@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .factory('recipeService', function ($q, $http) {
+  .factory('recipeService', ['$q', '$http', '$rootScope', function ($q, $http, $rootScope) {
 
     var service = {};
 
@@ -11,9 +11,9 @@ angular.module('cookingBuddy20App')
     service.getAllRecipes = function () {
       return $http.get('/api/recipes')
         .success(function (recipes) {
-          service.allRecipes = recipes;
-          return recipes;
-        })
+           service.allRecipes = recipes;
+           return recipes;
+        });
     };
 
     service.getRecipe = function (recipeId) {
@@ -21,14 +21,14 @@ angular.module('cookingBuddy20App')
         .success(function (recipe) {
           console.log(recipe);
           service.currRecipe = recipe;
-        })
+        });
     };
 
     service.createRecipe = function (recipeObj) {
       return $http.post('/api/recipes', recipeObj)
         .success(function (data) {
           service.allRecipes.push(data);
-        })
+        });
     };
 
     service.deleteRecipe = function (recipeId) {
@@ -47,8 +47,23 @@ angular.module('cookingBuddy20App')
       return $http.put('/api/recipes', recipeObj)
         .success(function (data) {
           console.log('Success Creating Recipe');
-        })
+        });
     };
 
+    // service.saveState = function () {
+    //   sessionStorage.recipeService = angular.toJson(service.state);
+    //   console.log("33333333333hello from saveState");
+    // };
+    // //$rootScope.$on("savestate", saveState);
+
+    // service.restoreState = function (){
+    //   service.state = angular.fromJson(sessionStorage.recipeService);
+    //   console.log("444444444hello from restoreState");
+    // };
+
+    // if (sessionStorage.recipeService) restoreState();
+    // $rootScope.$on('savestate', service.saveState);
+    // //$rootScope.$on('restorestate', service.restoreState);
+
     return service;
-  });
+  }]);

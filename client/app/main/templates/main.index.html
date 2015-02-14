@@ -8,9 +8,18 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Recipes:</h1>
-      <ul ng-repeat="recipe in recipeService.allRecipes" class="nav nav-tabs nav-stacked col-md-2 col-lg-4 col-sm-6">
-        <li><a href="" tooltip="{{recipe.name}}" ng-click="viewRecipe(recipe)">{{recipe.name}}</a><img ng-src="{{ recipe.image }}" /></li>
-      </ul>
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <ul class="nav nav-tabs nav-stacked ">
+            <li ng-repeat="recipe in recipeService.allRecipes"><a href="" tooltip="{{recipe.name}}" ng-click="viewRecipe(recipe)">{{recipe.name}}</a><img ng-src="{{ recipe.image }}" class="img-responsive"/></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <ul class="nav nav-tabs nav-stacked ">
+            <li ng-repeat="recipe in recipeService.allRecipes | orderBy:'-name'"><a href="" tooltip="{{recipe.name}}" ng-click="viewRecipe(recipe)">{{recipe.name}}</a><img ng-src="{{ recipe.image }}" class="img-responsive"/></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

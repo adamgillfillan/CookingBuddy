@@ -1,1 +1,27 @@
-<h1>Test Hello</h1>
+<div class="container">
+    <h1 class="page-header">{{recipeService.currRecipe.name}}</h1>
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <img id="img1" ng-src="{{recipeService.currRecipe.image}}" class="img-responsive">
+            <h3><strong>Ingredients</strong></h3>
+            <h4>
+                <!-- <ul id="ingredients_list" ng-repeat="ingredient in recipeService.currRecipe.ingredients"> -->
+                <ul ng-repeat="ingredient in recipeService.currRecipe.ingredients">
+                    <li>{{ingredient}}</li>
+                </ul>
+            </h4>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <div id="results">
+                <h3><strong>Steps</strong></h3>
+                <h4>
+                    <!-- <ol type="1" id="steps_list"> -->
+                    <ol>
+                        <li id="steps_list" ng-repeat="step in recipeService.currRecipe.steps">{{ step }}</li>
+                    </ol>
+                </h4>
+                <button type="button" class="btn btn-primary" id="start_button" onclick="startDictation(event)">Begin</button>
+            </div>
+        </div>
+    </div>
+</div>
