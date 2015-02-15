@@ -55,10 +55,10 @@ angular.module('cookingBuddy20App')
     }
 
     // need to refactor to own module
-    // service.beginDiction = function (message){
-    //   // return {message: "hello from service diction..."};
-    //   return window.speechSynthesis.speak(new SpeechSynthesisUtterance(message));
-    // };
+    service.speakMessage = function (message){
+      // return {message: "hello from service diction..."};
+      return window.speechSynthesis.speak(new SpeechSynthesisUtterance(message));
+    };
 
     // service.saveState = function () {
     //   sessionStorage.recipeService = angular.toJson(service.state);

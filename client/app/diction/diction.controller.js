@@ -28,6 +28,8 @@ angular.module('cookingBuddy20App')
         var results;
         var final_transcript = '';
         var recognizing = false;
+        var dialogue_message = '';
+        var current_step = -1;
         if (recognizing) {
           recognizing = false;
           recognition.stop();
@@ -65,7 +67,22 @@ angular.module('cookingBuddy20App')
         }
         if (final_transcript != ""){
           console.log(final_transcript);
+
+          // if (final_transcript.match(/first/i) && current_step == -1){
+          if (final_transcript.match(/first/i)){
+            current_step += 1;
+            // display_step = current_step + 1;
+            // action = 'first';
+            console.log(final_transcript);
+            //window.speechSynthesis.speak(new SpeechSynthesisUtterance(recipe.steps[current_step]));
+            message = recipeService.currRecipe.steps[current_step];
+            recipeService.speakMessage(message)
+            // changeStylingOfCurrentStep(display_step);
+            // finished = false;
+          }
         }
+
+
       };
     };
   });
