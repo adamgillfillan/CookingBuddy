@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .directive('addStyling', function () {
-    return function (scope, element, attrs) {
-        element.bind("mouseenter", function() {
-            element.addClass(attrs.addStyling);
-            console.log("hello from addStyling");    
-        });
-    };
-  })
-  .directive('removeStyling', function () {
-    return function (scope, element, attrs) {
-        element.bind("mouseleave", function() {
-            element.removeClass(attrs.addStyling);
-            console.log("hello from removeStyling");    
-        });
-    };
-  })
-  // .directive('currentStep', function () {
+  // .directive('addStyling', function () {
+  //   return function (scope, element, attrs) {
+  //       element.bind("mouseenter", function() {
+  //           element.addClass(attrs.addStyling);
+  //           // console.log("hello from addStyling");    
+  //       });
+  //   };
+  // })
+  // .directive('removeStyling', function () {
+  //   return function (scope, element, attrs) {
+  //       element.bind("mouseleave", function() {
+  //           element.removeClass(attrs.addStyling);
+  //           // console.log("hello from removeStyling");    
+  //       });
+  //   };
+  // })
+  // // .directive('currentStep', function () {
   //   return function (scope, element, attrs) {
   //       element.bind("mouseleave", function() {
   //           element.removeClass(attrs.addStyling);
@@ -59,16 +59,10 @@ angular.module('cookingBuddy20App')
             if(recognizing)
             recognition.start();
         };
-        var changeStylingOfCurrentStep = function (display_step) {
-            // console.log("hellooooooooo");
-            // changeStylingOfCurrentStep(display_step);
-            document.getElementById("steps_list"+recipeService.currentStep).style.color = "red";
-            document.getElementById("steps_list"+recipeService.currentStep).style.fontSize = "2.0em";
-        }
 
-        var returnStylingOfSteps = function (display_step) {
-            document.getElementById("steps_list"+recipeService.currentStep).style.color = "";
-            document.getElementById("steps_list"+recipeService.currentStep).style.fontSize = "1em";
+        var changeStepStyling = function (step, color, size) {
+            document.getElementById("steps_list"+step).style.color = color;
+            document.getElementById("steps_list"+step).style.fontSize = size;
         }
 
         recognition.onresult = function(event) {
@@ -86,29 +80,26 @@ angular.module('cookingBuddy20App')
             }
             if (final_transcript != ""){
                 console.log(final_transcript);
-
-              // if (final_transcript.match(/first/i) && current_step == -1){
                 if (final_transcript.match(/first/i)){
-                    // action = 'first';
-                    console.log(final_transcript);
+                    recipeService.currentStep += 1;
                     message = recipeService.currRecipe.steps[recipeService.currentStep];
                     recipeService.speakMessage(message);
-                    changeStylingOfCurrentStep(recipeService.current_step);
-                    // finished = false;
                 }
-            }
-       };
-       
+                if (final_transcript.match(/next/i)){
+                    recipeService.currentStep += 1;
+                    message = recipeService.currRecipe.steps[recipeService.currentStep];
+                    recipeService.speakMessage(message);
+
+                }
+                console.log(recipeService.currentStep);
+                scope.$watch(function(scope) { return recipeService.currentStep },
+                    function(newValue, oldValue) {
+                        changeStepStyling(oldValue, "", "1em");
+                        changeStepStyling(newValue, "red", "2em");
+                    }
+                );
+                scope.$digest();
+            };
+        };
     };
   }]);
-  // .directive('myDialog', function() {
-  //   return {
-  //       restrict: 'E',
-  //       transclude: true,
-  //       scope: {},
-  //       templateUrl: 'my-dialog.html',
-  //       link: function (scope, element) {
-  //         scope.name = 'Jeff';
-  //       }
-  //   };
-  //   });
