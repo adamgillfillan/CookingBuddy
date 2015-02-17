@@ -17,6 +17,14 @@ angular.module('cookingBuddy20App')
         });
     };
   })
+  // .directive('currentStep', function () {
+  //   return function (scope, element, attrs) {
+  //       element.bind("mouseleave", function() {
+  //           element.removeClass(attrs.addStyling);
+  //           console.log("hello from removeStyling");    
+  //       });
+  //   };
+  // })
   .directive('myDialog', ['recipeService', function (recipeService) {
     return function(scope, element, attrs) {
         console.log("inside link");
@@ -29,7 +37,8 @@ angular.module('cookingBuddy20App')
             var final_transcript = '';
             var recognizing = false;
             var message = '';
-            var current_step = -1;
+            //var current_step = -1;
+            //var display_step = current_step + 1;
             if (recognizing) {
               recognizing = false;
               recognition.stop();
@@ -38,8 +47,6 @@ angular.module('cookingBuddy20App')
             recognition.lang = 'en-US';
             recognition.start();
         }
-    // };
-
 
         recognition.onstart = function() {
             recognizing = true;
@@ -52,6 +59,18 @@ angular.module('cookingBuddy20App')
             if(recognizing)
             recognition.start();
         };
+        var changeStylingOfCurrentStep = function (display_step) {
+            // console.log("hellooooooooo");
+            // changeStylingOfCurrentStep(display_step);
+            document.getElementById("steps_list"+recipeService.currentStep).style.color = "red";
+            document.getElementById("steps_list"+recipeService.currentStep).style.fontSize = "2.0em";
+        }
+
+        var returnStylingOfSteps = function (display_step) {
+            document.getElementById("steps_list"+recipeService.currentStep).style.color = "";
+            document.getElementById("steps_list"+recipeService.currentStep).style.fontSize = "1em";
+        }
+
         recognition.onresult = function(event) {
             interim_transcript = '';
             results = '';
@@ -70,18 +89,16 @@ angular.module('cookingBuddy20App')
 
               // if (final_transcript.match(/first/i) && current_step == -1){
                 if (final_transcript.match(/first/i)){
-                    current_step += 1;
-                    // display_step = current_step + 1;
                     // action = 'first';
                     console.log(final_transcript);
-                    //window.speechSynthesis.speak(new SpeechSynthesisUtterance(recipe.steps[current_step]));
-                    message = recipeService.currRecipe.steps[current_step];
-                    recipeService.speakMessage(message)
-                    // changeStylingOfCurrentStep(display_step);
+                    message = recipeService.currRecipe.steps[recipeService.currentStep];
+                    recipeService.speakMessage(message);
+                    changeStylingOfCurrentStep(recipeService.current_step);
                     // finished = false;
                 }
             }
        };
+       
     };
   }]);
   // .directive('myDialog', function() {

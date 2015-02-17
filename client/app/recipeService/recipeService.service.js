@@ -7,6 +7,7 @@ angular.module('cookingBuddy20App')
 
     service.allRecipes = [];
     service.currRecipe = {};
+    service.currentStep = 0;
 
     service.getAllRecipes = function () {
       return $http.get('/api/recipes')
