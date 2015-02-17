@@ -47,6 +47,8 @@ angular.module('cookingBuddy20App')
             recognition.lang = 'en-US';
             recognition.start();
         }
+        var re = /first/i;
+        var re_2 = /next/i;
 
         recognition.onstart = function() {
             recognizing = true;
@@ -78,18 +80,13 @@ angular.module('cookingBuddy20App')
                     interim_transcript += event.results[i][0].transcript;
                 }
             }
+            
             if (final_transcript != ""){
                 console.log(final_transcript);
-                if (final_transcript.match(/first/i)){
+                if (final_transcript.match(re) || final_transcript.match(re_2)){
                     recipeService.currentStep += 1;
                     message = recipeService.currRecipe.steps[recipeService.currentStep];
                     recipeService.speakMessage(message);
-                }
-                if (final_transcript.match(/next/i)){
-                    recipeService.currentStep += 1;
-                    message = recipeService.currRecipe.steps[recipeService.currentStep];
-                    recipeService.speakMessage(message);
-
                 }
                 console.log(recipeService.currentStep);
                 scope.$watch(function(scope) { return recipeService.currentStep },
