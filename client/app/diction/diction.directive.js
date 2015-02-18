@@ -3,9 +3,9 @@
 angular.module('cookingBuddy20App')
   .directive('myDialog', function (recipeService, $timeout) {
     return function(scope, element, attrs) {
-        console.log("inside link");
         // window.speechSynthesis.speak(new SpeechSynthesisUtterance("To begin with your recipe, say, what is the first step?"));
         if ('webkitSpeechRecognition' in window) {
+            recipeService.sayHello();
             var recognition = new webkitSpeechRecognition();
             var finished = false;
             var results;
@@ -23,6 +23,9 @@ angular.module('cookingBuddy20App')
             }
             recognition.lang = 'en-US';
             recognition.start();
+        }
+        else{
+            alert("not here");
         }
 
         recognition.onstart = function() {
@@ -123,6 +126,9 @@ angular.module('cookingBuddy20App')
                 handleMatch(/first/i, 0, false);
                 handleMatch(/next/i, 1, true);
                 handleMatch(/repeat/i, recipeService.currentStep, false);
+
+                if (recipeService.currentStep > 0)
+                    handleMatch(/back/i, recipeService.currentStep-1, false);
                 
                 var re = /step (\d+)/i;
                 go_to = final_transcript.match(re);
@@ -133,6 +139,10 @@ angular.module('cookingBuddy20App')
                 handleMatchIngredients();
 
                 handleWatchAndListen();
+
+                // checks if back keyword is in transcript && also not at the start of the recipe
+                //if (final_transcript.match(/Cooking Buddy(.*)back/i) && current_step != 0){
+                
             };
         }
 
