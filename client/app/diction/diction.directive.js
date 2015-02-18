@@ -1,30 +1,6 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  // .directive('addStyling', function () {
-  //   return function (scope, element, attrs) {
-  //       element.bind("mouseenter", function() {
-  //           element.addClass(attrs.addStyling);
-  //           // console.log("hello from addStyling");    
-  //       });
-  //   };
-  // })
-  // .directive('removeStyling', function () {
-  //   return function (scope, element, attrs) {
-  //       element.bind("mouseleave", function() {
-  //           element.removeClass(attrs.addStyling);
-  //           // console.log("hello from removeStyling");    
-  //       });
-  //   };
-  // })
-  // // .directive('currentStep', function () {
-  //   return function (scope, element, attrs) {
-  //       element.bind("mouseleave", function() {
-  //           element.removeClass(attrs.addStyling);
-  //           console.log("hello from removeStyling");    
-  //       });
-  //   };
-  // })
   .directive('myDialog', function (recipeService, $timeout) {
     return function(scope, element, attrs) {
         console.log("inside link");
@@ -32,11 +8,12 @@ angular.module('cookingBuddy20App')
         if ('webkitSpeechRecognition' in window) {
             var recognition = new webkitSpeechRecognition();
             var finished = false;
-            var interim_transcript = '';
             var results;
+            var interim_transcript = '';
             var final_transcript = '';
             var recognizing = false;
             var message = '';
+            var go_to = '';
             //var current_step = -1;
             //var display_step = current_step + 1;
             if (recognizing) {
@@ -47,8 +24,6 @@ angular.module('cookingBuddy20App')
             recognition.lang = 'en-US';
             recognition.start();
         }
-        var re = /first/i;
-        var re_2 = /next/i;
 
         recognition.onstart = function() {
             recognizing = true;
@@ -85,7 +60,8 @@ angular.module('cookingBuddy20App')
             scope.$watch(function(scope) { return recipeService.currentStep },
                 function(newValue, oldValue) {
                     changeStepStyling(oldValue, "", "1em");
-                    changeStepStyling(newValue, "red", "2em");
+                    if (oldValue >= 0)
+                        changeStepStyling(newValue, "red", "2em");
                 }
             );
             scope.$digest();
@@ -106,6 +82,8 @@ angular.module('cookingBuddy20App')
             };
         };
 
+        // if increment is true, increment the currentStep.
+        // else set currentStep to value
         var handleMatch = function(regex, value, increment) {
             if (final_transcript.match(regex)){
                 if (increment)
@@ -121,8 +99,18 @@ angular.module('cookingBuddy20App')
             
             if (final_transcript != ""){
                 console.log(final_transcript);
+                
+                /* Handle regex matching */
                 handleMatch(/first/i, 0, false);
                 handleMatch(/next/i, 1, true);
+                handleMatch(/repeat/i, recipeService.currentStep, false);
+                
+                var re = /step (\d+)/i;
+                go_to = final_transcript.match(re);
+                if (go_to){
+                    handleMatch(re, go_to[1]-1, false);
+                }
+                
                 handleWatchAndListen();
             };
         };
