@@ -59,9 +59,14 @@ angular.module('cookingBuddy20App')
         var handleWatchAndListen = function() {
             scope.$watch(function(scope) { return recipeService.currentStep },
                 function(newValue, oldValue) {
-                    changeStepStyling(oldValue, "", "1em");
-                    if (oldValue >= 0)
+                    console.log(oldValue, newValue);
+                    if (newValue >= 0 && oldValue < 0){
+                        // changeStepStyling(oldValue, "", "1em");
                         changeStepStyling(newValue, "red", "2em");
+                    } else if (newValue >= 0 && oldValue >= 0){
+                        changeStepStyling(oldValue, "", "1em");
+                        changeStepStyling(newValue, "red", "2em");
+                    }
                 }
             );
             scope.$digest();
@@ -94,9 +99,23 @@ angular.module('cookingBuddy20App')
             };
         };
 
-        recognition.onresult = function(event) {
-            buildTranscript();
-            
+        var handleMatchIngredients = function() {
+            // matches "$item in ingredients pattern: '$quantity $measurement $item'"
+            var re_3 = /How (many|much) (.*) do I need/i;
+            var question = final_transcript.match(re_3);
+            if (question){
+                for(var j = 0; j < recipeService.currRecipe.ingredients.length; j++){
+                    if(recipeService.currRecipe.ingredients[j].indexOf(question[2]) > -1) {
+                        message = "You need " + recipeService.currRecipe.ingredients[j];
+                        //console.log(utterance);
+                        break;
+                    }
+                }
+                recipeService.speakMessage(message);
+            }
+        };
+
+        var handleMatches = function() {
             if (final_transcript != ""){
                 console.log(final_transcript);
                 
@@ -111,8 +130,16 @@ angular.module('cookingBuddy20App')
                     handleMatch(re, go_to[1]-1, false);
                 }
                 
+                handleMatchIngredients();
+
                 handleWatchAndListen();
             };
+        }
+
+        recognition.onresult = function(event) {
+            buildTranscript();
+            
+            handleMatches();
         };
     };
   });
