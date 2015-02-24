@@ -22,5 +22,12 @@ angular.module('cookingBuddy20App')
         views: {
             'recipe-content' : { templateUrl: 'app/main/templates/main.view.html' }
         }
+      })
+      .state('main.about', {
+        url: '/about',
+        controller: 'MainCtrl',
+        views: {
+            'recipe-content' : { templateUrl: 'app/main/templates/main.about.html' }
+        }
       });
     });

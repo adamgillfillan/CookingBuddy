@@ -4,11 +4,11 @@ angular.module('cookingBuddy20App')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': 'main.index'
     },
     {
       'title': 'About',
-      'link': '/about'  
+      'link': 'main.about'  
     }];
 
     $scope.isCollapsed = true;
