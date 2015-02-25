@@ -31,9 +31,15 @@ angular.module('cookingBuddy20App')
       })
       .state('main.about', {
         url: '/about',
-        // controller: 'MainCtrl',
         views: {
             'recipe-content' : { templateUrl: 'app/main/templates/main.about.html' }
+        }
+      })
+      .state('main.create', {
+        url: '/create',
+        controller: 'MainCtrl',
+        views: {
+            'recipe-content' : { templateUrl: 'app/main/templates/main.create.html' }
         }
       });
     });

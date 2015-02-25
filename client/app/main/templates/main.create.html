@@ -1,0 +1,24 @@
+<div class="container">
+	<h3 class="page-header">Add Recipe</h3>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input ng-model="newRecipe.name" name="name" type="text" placeholder="Recipe Name" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="image" class="col-sm-2 control-label">Image</label>
+			<div class="col-xs-10">
+				<input ng-model="newRecipe.picture" name="image" type="text" placeholder="Image URL" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description" class="col-xs-2 control-label">Description</label>
+			<div class="col-xs-10">
+				<textarea ng-model="newRecipe.description" name="description" placeholder="This recipe is...."></textarea class="form-control">
+			</div>
+		</div>
+		<button class="btn-block btn btn-primary" ng-click="addRecipe()">Create</button>
+	 </form>
+</div>

@@ -9,6 +9,10 @@ angular.module('cookingBuddy20App')
     {
       'title': 'About',
       'link': 'main.about'  
+    },
+    {
+      'title': 'Add Recipe',
+      'link': 'main.create'
     }];
 
     $scope.isCollapsed = true;

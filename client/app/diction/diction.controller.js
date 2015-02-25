@@ -23,4 +23,6 @@ angular.module('cookingBuddy20App')
     var dictionHandling = function (){
       console.log("hello from dictionHandling");
     };
+
+    
   });
