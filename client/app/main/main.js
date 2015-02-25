@@ -18,14 +18,20 @@ angular.module('cookingBuddy20App')
       })
       .state('main.view', {
         url: '/:name',
-        controller: 'MainCtrl',
+        controller: 'DictionCtrl',
         views: {
             'recipe-content' : { templateUrl: 'app/main/templates/main.view.html' }
+        },
+        onEnter: function(recipeService){
+          recipeService.startFresh();
+        },
+        onExit: function(dictionService){
+          dictionService.stopListening();
         }
       })
       .state('main.about', {
         url: '/about',
-        controller: 'MainCtrl',
+        // controller: 'MainCtrl',
         views: {
             'recipe-content' : { templateUrl: 'app/main/templates/main.about.html' }
         }
