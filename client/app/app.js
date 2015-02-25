@@ -1,4 +1,3 @@
-
 angular.module('cookingBuddy20App', [
   'ngCookies',
   'ngResource',
