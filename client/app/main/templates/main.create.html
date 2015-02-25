@@ -1,24 +1,71 @@
+<!-- var RecipeSchema = new Schema({
+    name        : String,
+    image       : String,
+    time        : {
+        prep    : Number,
+        cook    : Number,
+        cool    : Number,
+        ready   : Number
+    },
+    ingredients : [String],
+    steps       : [String]
+}); -->
+
 <div class="container">
 	<h3 class="page-header">Add Recipe</h3>
 	<form class="form-horizontal">
+		
+		<!-- Name -->
 		<div class="form-group">
-			<label for="name" class="col-sm-2 control-label">Name</label>
-			<div class="col-sm-10">
+			<label for="name" class="col-xs-7 col-sm-5  col-md-3 control-label">Name</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
 				<input ng-model="newRecipe.name" name="name" type="text" placeholder="Recipe Name" class="form-control">
 			</div>
 		</div>
+
+		<!-- Image -->
 		<div class="form-group">
-			<label for="image" class="col-sm-2 control-label">Image</label>
-			<div class="col-xs-10">
+			<label for="image" class="col-xs-7 col-sm-5  col-md-3 control-label">Image</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
 				<input ng-model="newRecipe.picture" name="image" type="text" placeholder="Image URL" class="form-control">
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="description" class="col-xs-2 control-label">Description</label>
-			<div class="col-xs-10">
-				<textarea ng-model="newRecipe.description" name="description" placeholder="This recipe is...."></textarea class="form-control">
+		
+		<!-- Time -->
+		<div class="form-group pull-left">
+			<label for="time-prep" class="col-xs-7 col-sm-5  col-md-3 control-label">Prep Time (minutes)</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.time[0]" type="text" class="form-control" name="time-prep" placeholder="10">
+			</div>
+			<label for="time-cook" class="col-xs-7 col-sm-5  col-md-3 control-label">Cook Time (minutes)</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.time[1]" type="text" class="form-control" name="time-cook" placeholder="45">
+			</div>
+			<label for="time-cool" class="col-xs-7 col-sm-5  col-md-3 control-label">Cool Time (minutes)</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.time[2]" type="text" class="form-control" name="time-cool" placeholder="5">
+			</div>
+			<label for="time-ready" class="col-xs-7 col-sm-5  col-md-3 control-label">Ready in (minutes)</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.time[3]" type="text" class="form-control" name="time-ready" placeholder="60">
 			</div>
 		</div>
-		<button class="btn-block btn btn-primary" ng-click="addRecipe()">Create</button>
+
+		<!-- Ingredients -->
+		<div class="form-group">
+			<label for="ingredients" class="col-xs-7 col-sm-5  col-md-3 control-label">Ingredients</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.ingredients" type="text" class="form-control" name="ingredients" placeholder="Eggs, Chocolate, Milk">
+			</div>
+		</div>
+
+		<!-- Steps -->
+		<div class="form-group">
+			<label for="steps" class="col-xs-7 col-sm-5  col-md-3 control-label">Steps</label>
+			<div class="col-xs-5 col-sm-7 col-md-9 ">
+				<input ng-model="newRecipe.ingredients" type="text" class="form-control" name="ingredients" placeholder="Beat eggs until a smooth consistency.">
+			</div>
+		</div>
+		<button class="btn btn-primary" ng-click="addRecipe()">Create</button>
 	 </form>
 </div>
