@@ -135,8 +135,10 @@ angular.module('cookingBuddy20App')
                         handleMatch(/back/i, recipeService.currentStep-1, false);
                     
                     var re = /step (\d+)/i;
+                    //var re = /step/i;
                     go_to = final_transcript.match(re);
                     if (go_to){
+                        console.log("matched")
                         handleMatch(re, go_to[1]-1, false);
                     }
                     
