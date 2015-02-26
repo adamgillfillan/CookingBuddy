@@ -112,9 +112,11 @@ angular.module('cookingBuddy20App')
                 var question = final_transcript.match(re_3);
                 if (question){
                     for(var j = 0; j < recipeService.currRecipe.ingredients.length; j++){
-                        if(recipeService.currRecipe.ingredients[j].indexOf(question[2]) > -1) {
+                        console.log("ingredients: " + recipeService.currRecipe.ingredients[j]);
+                        if(recipeService.currRecipe.ingredients[j].toLowerCase().indexOf(question[2]) > -1) {
+                            console.log("made it to a question pt 2");
                             message = "You need " + recipeService.currRecipe.ingredients[j];
-                            //console.log(utterance);
+                            console.log(message);
                             break;
                         }
                     }
