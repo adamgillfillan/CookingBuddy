@@ -1,11 +1,34 @@
 'use strict';
-
+// <!-- var RecipeSchema = new Schema({
+//     name        : String,
+//     image       : String,
+//     time        : {
+//         prep    : Number,
+//         cook    : Number,
+//         cool    : Number,
+//         ready   : Number
+//     },
+//     ingredients : [String],
+//     steps       : [String]
+// }); -->
 
 angular.module('cookingBuddy20App')
   .controller('MainCtrl', function ($scope, recipeService, $location, $state) {
 
     $scope.recipeService = recipeService;
     recipeService.getAllRecipes();
+    $scope.ingredients = [{id: 'ingredient0'}];
+    $scope.steps = [{id: 'step0'}];
+
+    $scope.addNewIngredient = function () {
+      var newItemNo = $scope.ingredients.length + 1;
+      $scope.ingredients.push({'id':'ingredient'+newItemNo});
+    };
+
+    $scope.addNewStep = function () {
+      var newItemNo = $scope.ingredients.length + 1;
+      $scope.steps.push({'id':'step'+newItemNo});
+    };
 
     $scope.viewRecipe = function (recipe) {
       recipeService.getRecipe(recipe._id);
@@ -18,11 +41,12 @@ angular.module('cookingBuddy20App')
       $location.path('/');
     };
 
-    $scope.newRecipe = { name: '', picture: '', description: '' };
+    $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [] }
 
     $scope.addRecipe = function () {
       recipeService.createRecipe($scope.newRecipe);
-      $scope.newRecipe = { name: '', picture: '', description: '' };
+      // $scope.newRecipe = { name: '', picture: '', description: '' };
+      $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [] }
     };
 
     $scope.sayHello = function (){
