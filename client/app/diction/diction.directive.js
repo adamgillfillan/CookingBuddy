@@ -3,7 +3,10 @@
 angular.module('cookingBuddy20App')
   .directive('myDialog', function (recipeService, dictionService, $timeout) {
     return {
+        // restrict: 'A',
+        // scope: true,
         link: function(scope, element, attrs) {
+            element.on('click', function(event2) {
         // window.speechSynthesis.speak(new SpeechSynthesisUtterance("To begin with your recipe, say, what is the first step?"));
             if ('webkitSpeechRecognition' in window) {
                 //recipeService.sayHello();
@@ -159,6 +162,7 @@ angular.module('cookingBuddy20App')
                 
                 handleMatches();
             };
+        });
         }
     };
   });
