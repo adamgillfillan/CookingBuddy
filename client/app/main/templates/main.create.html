@@ -1,19 +1,5 @@
-<!-- var RecipeSchema = new Schema({
-    name        : String,
-    image       : String,
-    time        : {
-        prep    : Number,
-        cook    : Number,
-        cool    : Number,
-        ready   : Number
-    },
-    ingredients : [String],
-    steps       : [String]
-}); -->
-
 <div class="container">
 	<h3 class="page-header">Add Recipe</h3>
-	<!-- <div class="form-container"> -->
 		<form class="form-horizontal">	
 			<!-- Name -->
 			<div class="form-group">
@@ -52,22 +38,19 @@
 			</div>
 
 			<!-- Ingredients -->
-			<div class="form-group lists" >
+			<div class="form-group" >
 				<div ng-repeat="ingredient in ingredients">
 					<label for="ingredients" class="col-xs-7 col-sm-5 col-md-3 control-label" ng-show="$first" >Ingredients</label>
 					<div class="col-xs-7 col-sm-5 col-md-3"></div>
 					<div class="col-xs-9 col-sm-7 col-md-9" >
 						<input ng-model="newRecipe.ingredients[$index]" type="text" class="form-control" name="ingredients" placeholder="3 Eggs">
 						<button class="btn btn-success" ng-show="$last" ng-click="addNewIngredient()">Add Ingredient</button>
-						<!-- <div class="col-xs-2">
-							
-						</div> -->
 					</div>
 				</div>
 			</div>
 
 			<!-- Steps -->
-			<div class="form-group lists">
+			<div class="form-group">
 				<div ng-repeat="step in steps">
 					<label for="steps" class="col-xs-7 col-sm-5 col-md-3 control-label" ng-show="$first">Steps</label>
 					<div class="col-xs-7 col-sm-5 col-md-3"></div>
@@ -78,6 +61,5 @@
 				</div>
 			</div>
 			<button class="btn btn-primary" ng-click="addRecipe()">Create</button>
-		 </form>
-	<!-- </div> -->
+		</form>
 </div>
