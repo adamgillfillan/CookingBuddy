@@ -7,7 +7,6 @@ angular.module('cookingBuddy20App')
         // scope: true,
         link: function(scope, element, attrs) {
             element.on('click', function(event2) {
-        // window.speechSynthesis.speak(new SpeechSynthesisUtterance("To begin with your recipe, say, what is the first step?"));
             if ('webkitSpeechRecognition' in window) {
                 //recipeService.sayHello();
                 dictionService.createRecognitionObject();
@@ -17,10 +16,8 @@ angular.module('cookingBuddy20App')
                 var results;
                 var interim_transcript = '';
                 var final_transcript = '';
-                // var recognizing = false;
                 var message = '';
-                var go_to = '';
-                //var current_step = -1;
+                // var go_to = '';
                 //var display_step = current_step + 1;
                 if (dictionService.recognizing) {
                   dictionService.recognizing = false;
@@ -57,8 +54,8 @@ angular.module('cookingBuddy20App')
                 document.getElementById("steps_list"+step).style.fontSize = size;
             };
 
-            var handleUtterance = function() {
-                message = recipeService.currRecipe.steps[recipeService.currentStep];
+            var handleUtterance = function(message) {
+                
                 dictionService.recognizing = false;
                 dictionService.recognition.stop();
                 dictionService.speakMessage(message);
@@ -105,7 +102,8 @@ angular.module('cookingBuddy20App')
                         recipeService.currentStep += 1;
                     else
                         recipeService.currentStep = value;
-                    handleUtterance();
+                    message = recipeService.currRecipe.steps[recipeService.currentStep];
+                    handleUtterance(message);
                 };
             };
 
@@ -123,7 +121,7 @@ angular.module('cookingBuddy20App')
                             break;
                         }
                     }
-                    dictionService.speakMessage(message);
+                    handleUtterance(message);
                 }
             };
 
@@ -141,7 +139,7 @@ angular.module('cookingBuddy20App')
                     
                     var re = /step (\d+)/i;
                     //var re = /step/i;
-                    go_to = final_transcript.match(re);
+                    var go_to = final_transcript.match(re);
                     if (go_to){
                         console.log("matched")
                         handleMatch(re, go_to[1]-1, false);
