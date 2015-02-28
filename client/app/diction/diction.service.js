@@ -3,6 +3,7 @@ angular.module('cookingBuddy20App')
 
   	var service = {};
   	service.recognizing = false;
+    service.actionTaken = 'nothing';
   	
   	service.createRecognitionObject = function(){
   		service.recognition = new webkitSpeechRecognition();
@@ -14,6 +15,7 @@ angular.module('cookingBuddy20App')
   	};
 
     service.speakMessage = function (message){
+      // service.actionTaken = 'message';
       return window.speechSynthesis.speak(new SpeechSynthesisUtterance(message));
     };
 
