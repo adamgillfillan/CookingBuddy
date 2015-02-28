@@ -13,9 +13,21 @@
     <!-- <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main"> -->
     <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+        <li ng-class="{active: isActive(main.index)}"><a ui-sref="main.index">Home</a></li>
+        <li ng-class="{active: isActive(main.about)}"><a ui-sref="main.about">About</a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive(main.create)}"><a ui-sref="main.create">Add Recipe</a></li>
+        <!-- <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ui-sref="{{item.link}}">{{item.title}}</a>
-        </li>
+        </li> -->
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+        <!-- <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p><a href="/me" </li> -->
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>
   </div>

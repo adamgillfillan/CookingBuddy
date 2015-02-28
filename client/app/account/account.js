@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('testYoAngularFullstackAuthApp')
+angular.module('cookingBuddy20App')
   .config(function ($stateProvider) {
     $stateProvider
       .state('login', {

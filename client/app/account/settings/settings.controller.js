@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('testYoAngularFullstackAuthApp')
+angular.module('cookingBuddy20App')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
 
