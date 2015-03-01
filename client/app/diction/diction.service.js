@@ -20,8 +20,10 @@ angular.module('cookingBuddy20App')
     };
 
     service.stopListening = function(){
-      if(service.recognition)
-      	service.recognition.stop();
+      if(service.recognizing)
+        service.recognition.stop();
+      // if(service.recognition)
+      // 	service.recognition.stop();
     	service.recognizing = false;
     };
 

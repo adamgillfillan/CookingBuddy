@@ -157,18 +157,9 @@ angular.module('cookingBuddy20App')
                     };
                 }
 
-                recognition.onresult = function(event) {
-                    dictionService.actionTaken = "nothing";
-                    buildTranscript();
-                    handleMatches();
-
-                    // $.bootstrapGrowl(final_transcript, {
-                    //     type: (dictionService.actionTaken === "nothing") ? "danger" : "success",
-                    //     width: 'auto'
-                    // });
-
+                var notifyMessage = function() {
                     $.notify({
-                        title: (dictionService.actionTaken === "nothing") ? "Uncrecognized" : "Success!",
+                        title: (dictionService.actionTaken === "nothing") ? "No Action: " : "Action Taken!",
                         message: final_transcript,
                     },{
                         type: (dictionService.actionTaken === "nothing") ? "danger" : "success",
@@ -202,6 +193,19 @@ angular.module('cookingBuddy20App')
                             '<a href="{3}" target="{4}" data-notify="url"></a>' +
                         '</div>'
                     });
+                }
+
+                recognition.onresult = function(event) {
+                    dictionService.actionTaken = "nothing";
+                    buildTranscript();
+                    handleMatches();
+
+                    // $.bootstrapGrowl(final_transcript, {
+                    //     type: (dictionService.actionTaken === "nothing") ? "danger" : "success",
+                    //     width: 'auto'
+                    // });
+
+                    notifyMessage();
                 };
             });
         }
