@@ -32,7 +32,7 @@ angular.module('cookingBuddy20App')
 
     $scope.viewRecipe = function (recipe) {
       recipeService.getRecipe(recipe._id);
-      $location.path('/' + recipe.name);
+      $location.path('/' + recipe._id);
       //$state.go('main.view');
     };
 
