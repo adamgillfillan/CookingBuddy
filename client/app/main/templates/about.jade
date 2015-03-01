@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  .container
+    h3.page-header About
+    .row
+      .col-xs-12
+        p
+          | CookingBuddy is a spoken dialogue cooking assistant. Select a recipe and press "begin".
+        |       Some commands to ask CookingBuddy:
+        ul
+          li
+            | What is first? 
+            span.text-muted - CookingBuddy tells you the first step in the recipe.
+          li
+            | What is next? 
+            span.text-muted - CookingBuddy tells you the next step in the recipe.
+          li
+            | Go back. 
+            span.text-muted - CookingBuddy goes back a step in the recipe.
+          li
+            | Repeat that. 
+            span.text-muted - CookingBuddy repeats the current step of the recipe.
+          li
+            | Go to step 5. 
+            span.text-muted - CookingBuddy goes to the step in the recipe that you request.
+          li
+            | How many eggs do I need? 
+            span.text-muted - CookingBuddy tells you how much of an ingredient you need.
+        p
+          | CookingBuddy works only on the Google Chrome browser.
+          | CookingBuddy works on smartphones, tablets, laptops, and desktops.
+          | Unfortunately, Speech recognition is not supported by Apple on the mobile Chrome browser. So, CookingBuddy will not work on an iPad or iPhone.
