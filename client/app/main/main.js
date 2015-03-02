@@ -21,7 +21,8 @@ angular.module('cookingBuddy20App')
       .state('create', {
         url: '/create',
         controller: 'MainCtrl',
-        templateUrl: 'app/main/templates/create.html'
+        templateUrl: 'app/main/templates/create.html',
+        authenticate: true
       })
       .state('view', {
         url: '/:name',
