@@ -10,14 +10,17 @@ block content
     .row
       .col-lg-12
         h1.page-header Recipes:
+          span.small
+            form.form-inline.pull-right
+              input(ng-model='query', type='text', placeholder='Search', autofocus='')
         .row
           .col-sm-6.col-md-6.col-lg-6
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat='recipe in recipeService.allRecipes | limitTo: recipeService.allRecipes.length/2')
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: recipeService.allRecipes.length/2 | filter:query | orderBy: 'name'")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-responsive(ng-src='{{ recipe.image }}')
           .col-sm-6.col-md-6.col-lg-6
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat='recipe in recipeService.allRecipes | limitTo: -recipeService.allRecipes.length/2')
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: -recipeService.allRecipes.length/2 | filter:query | orderBy: 'name'")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-responsive(ng-src='{{ recipe.image }}')
