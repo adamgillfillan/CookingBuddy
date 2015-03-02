@@ -46,6 +46,8 @@ angular.module('cookingBuddy20App')
       recipeService.createRecipe($scope.newRecipe);
       // $scope.newRecipe = { name: '', picture: '', description: '' };
       $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [] }
+      $scope.ingredients = [{id: 'ingredient0'}];
+      $scope.steps = [{id: 'step0'}];
     };
 
     $scope.sayHello = function (){
@@ -67,7 +69,7 @@ angular.module('cookingBuddy20App')
   //     // console.log("hello from diction ctrl");
   //     // console.log(myMessage.message);
   //       // console.log("hello from window load");
-      
+
   //       // window.speechSynthesis.speak(new SpeechSynthesisUtterance("I assist you with cooking meals based on a recipe."));
   //       // window.speechSynthesis.speak(new SpeechSynthesisUtterance("You can say things like, how many steps are left?"));
   //       // window.speechSynthesis.speak(new SpeechSynthesisUtterance("Or: what is the next step?"));
