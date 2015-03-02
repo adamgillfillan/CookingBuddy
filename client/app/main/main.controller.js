@@ -51,11 +51,6 @@ angular.module('cookingBuddy20App')
       $scope.steps = [{id: 'step0'}];
     };
 
-    $scope.sayHello = function (){
-      recipeService.sayHello();
-      //console.log("hello from controller");
-    };
-
     // $scope.update = function(recipe){
     //     recipeService.currRecipe = recipe;
     // };
