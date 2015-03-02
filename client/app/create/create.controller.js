@@ -28,5 +28,27 @@ angular.module('cookingBuddy20App')
       $scope.ingredients = [{id: 'ingredient0'}];
       $scope.steps = [{id: 'step0'}];
     };
+    
+    $scope.recipe = {};
+    $scope.errors = {};
+
+    $scope.register = function(form) {
+      $scope.submitted = true;
+
+      if(form.$valid) {
+        $scope.newRecipe.creator = Auth.getCurrentUser();
+        recipeService.createRecipe($scope.newRecipe)
+          .catch( function(err) {
+            err = err.data;
+            $scope.errors = {};
+
+            // Update validity of form fields that match the mongoose errors
+            angular.forEach(err.errors, function(error, field) {
+              form[field].$setValidity('mongoose', false);
+              $scope.errors[field] = error.message;
+            });
+          });
+      }
+    };
 
   });

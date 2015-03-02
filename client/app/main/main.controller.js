@@ -13,7 +13,7 @@
 // }); -->
 
 angular.module('cookingBuddy20App')
-  .controller('MainCtrl', function ($scope, recipeService, $location, $state, User, Auth) {
+  .controller('MainCtrl', function ($scope, recipeService, $location) {
 
     $scope.recipeService = recipeService;
     recipeService.getAllRecipes();
@@ -27,5 +27,5 @@ angular.module('cookingBuddy20App')
       recipeService.deleteRecipe(recipeService.currRecipe._id);
       $location.path('/');
     };
-    
+
   });
