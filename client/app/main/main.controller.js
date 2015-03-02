@@ -13,7 +13,7 @@
 // }); -->
 
 angular.module('cookingBuddy20App')
-  .controller('MainCtrl', function ($scope, recipeService, $location, $state) {
+  .controller('MainCtrl', function ($scope, recipeService, $location, $state, User, Auth) {
 
     $scope.recipeService = recipeService;
     recipeService.getAllRecipes();
@@ -40,12 +40,13 @@ angular.module('cookingBuddy20App')
       $location.path('/');
     };
 
-    $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [] }
+    $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool:   '', ready: ''}, ingredients: [], steps: [], creator: '' }
 
     $scope.addRecipe = function () {
+      $scope.newRecipe.creator = Auth.getCurrentUser();
       recipeService.createRecipe($scope.newRecipe);
-      // $scope.newRecipe = { name: '', picture: '', description: '' };
-      $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [] }
+
+      $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' }
       $scope.ingredients = [{id: 'ingredient0'}];
       $scope.steps = [{id: 'step0'}];
     };
@@ -53,7 +54,7 @@ angular.module('cookingBuddy20App')
     $scope.sayHello = function (){
       recipeService.sayHello();
       //console.log("hello from controller");
-    }
+    };
 
     // $scope.update = function(recipe){
     //     recipeService.currRecipe = recipe;

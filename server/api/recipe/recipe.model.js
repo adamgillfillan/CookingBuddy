@@ -13,7 +13,8 @@ var RecipeSchema = new Schema({
         ready   : Number
     },
     ingredients : [String],
-    steps       : [String]
+    steps       : [String],
+    creator     : {type: mongoose.Schema.Types.Object, ref: 'User'}
 });
 
 RecipeSchema.statics.isValidName = function (name, callback) {

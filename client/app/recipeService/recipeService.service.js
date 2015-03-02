@@ -21,6 +21,7 @@ angular.module('cookingBuddy20App')
       return $http.get('/api/recipes/' + recipeId)
         .success(function (recipe) {
           console.log(recipe);
+          console.log(recipe.creator);
           service.currRecipe = recipe;
         });
     };
@@ -61,10 +62,10 @@ angular.module('cookingBuddy20App')
         .success(function (recipe) {
           console.log(recipe);
           service.currRecipe = recipe;
-        }); 
+        });
     };
 
-    
+
     // service.saveState = function () {
     //   sessionStorage.recipeService = angular.toJson(service.state);
     //   console.log("33333333333hello from saveState");
