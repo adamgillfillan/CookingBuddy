@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .factory('recipeService', ['$q', '$http', '$rootScope', function ($q, $http, $rootScope) {
+  .factory('recipeService', ['$q', '$http', '$rootScope', '$location', function ($q, $http, $rootScope, $location) {
 
     var service = {};
 
@@ -53,6 +53,15 @@ angular.module('cookingBuddy20App')
 
     service.startFresh = function(){
       service.currentStep = -1;
+    };
+
+    service.getRecipeBasedOnUrl = function(){
+      var recipeId = $location.path();
+      return $http.get('/api/recipes/' + recipeId)
+        .success(function (recipe) {
+          console.log(recipe);
+          service.currRecipe = recipe;
+        }); 
     };
 
     
