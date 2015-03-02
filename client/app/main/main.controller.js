@@ -17,18 +17,6 @@ angular.module('cookingBuddy20App')
 
     $scope.recipeService = recipeService;
     recipeService.getAllRecipes();
-    $scope.ingredients = [{id: 'ingredient0'}];
-    $scope.steps = [{id: 'step0'}];
-
-    $scope.addNewIngredient = function () {
-      var newItemNo = $scope.ingredients.length + 1;
-      $scope.ingredients.push({'id':'ingredient'+newItemNo});
-    };
-
-    $scope.addNewStep = function () {
-      var newItemNo = $scope.ingredients.length + 1;
-      $scope.steps.push({'id':'step'+newItemNo});
-    };
 
     $scope.viewRecipe = function (recipe) {
       // recipeService.getRecipe(recipe._id);
@@ -38,17 +26,6 @@ angular.module('cookingBuddy20App')
     $scope.deleteRecipe = function () {
       recipeService.deleteRecipe(recipeService.currRecipe._id);
       $location.path('/');
-    };
-
-    $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool:   '', ready: ''}, ingredients: [], steps: [], creator: '' }
-
-    $scope.addRecipe = function () {
-      $scope.newRecipe.creator = Auth.getCurrentUser();
-      recipeService.createRecipe($scope.newRecipe);
-
-      $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' }
-      $scope.ingredients = [{id: 'ingredient0'}];
-      $scope.steps = [{id: 'step0'}];
     };
 
     // $scope.update = function(recipe){

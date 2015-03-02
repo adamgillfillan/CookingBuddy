@@ -1,0 +1,47 @@
+extends ../main/layout
+
+block content
+  .container
+    h3.page-header Add Recipe
+    form.form-horizontal
+      // Name
+      .form-group
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='name') Name
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.name', name='name', type='text', placeholder='Recipe Name')
+      // Image
+      .form-group
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='image') Image
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.image', name='image', type='text', placeholder='Image URL')
+      // Time
+      .form-group
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='time-prep') Prep Time (minutes)
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.time.prep', type='text', name='time-prep', placeholder='10')
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='time-cook') Cook Time (minutes)
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.time.cook', type='text', name='time-cook', placeholder='45')
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='time-cool') Cool Time (minutes)
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.time.cool', type='text', name='time-cool', placeholder='5')
+        label.col-xs-7.col-sm-5.col-md-3.control-label(for='time-ready') Ready in (minutes)
+        .col-xs-5.col-sm-7.col-md-9
+          input.form-control(ng-model='newRecipe.time.ready', type='text', name='time-ready', placeholder='60')
+      // Ingredients
+      .form-group
+        div(ng-repeat='ingredient in ingredients')
+          label.col-xs-7.col-sm-5.col-md-3.control-label(for='ingredients', ng-show='$first') Ingredients
+          .col-xs-7.col-sm-5.col-md-3
+          .col-xs-9.col-sm-7.col-md-9
+            input.form-control(ng-model='newRecipe.ingredients[$index]', type='text', name='ingredients', placeholder='3 Eggs')
+            button.btn.btn-success(ng-show='$last', ng-click='addNewIngredient()') Add Ingredient
+      // Steps
+      .form-group
+        div(ng-repeat='step in steps')
+          label.col-xs-7.col-sm-5.col-md-3.control-label(for='steps', ng-show='$first') Steps
+          .col-xs-7.col-sm-5.col-md-3
+          .col-xs-9.col-sm-7.col-md-9
+            input.form-control(ng-model='newRecipe.steps[$index]', type='text', name='steps', placeholder='Beat eggs until a smooth consistency.')
+            button.btn.btn-success(ng-show='$last', ng-click='addNewStep()') Add Step
+      button.btn.btn-primary(ng-click='addRecipe()') Create

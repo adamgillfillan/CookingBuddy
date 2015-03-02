@@ -24,4 +24,11 @@ RecipeSchema.statics.isValidName = function (name, callback) {
     return false;
 };
 
+// Validate empty name
+RecipeSchema
+  .path('name')
+  .validate(function(name) {
+    return (name != '')
+  }, 'Email cannot be blank');
+
 module.exports = mongoose.model('Recipe', RecipeSchema);
