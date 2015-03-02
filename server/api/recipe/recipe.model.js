@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var RecipeSchema = new Schema({
-    name        : String,
+    name        : { type: String, required: true},
     image       : String,
     time        : {
         prep    : Number,

@@ -16,11 +16,6 @@ block content
         .row
           .col-sm-6.col-md-6.col-lg-6
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: recipeService.allRecipes.length/2 | filter:query | orderBy: 'name' | userRecipes")
-                a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
-                img.img-responsive(ng-src='{{ recipe.image }}')
-          .col-sm-6.col-md-6.col-lg-6
-            ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: -recipeService.allRecipes.length/2 | filter:query | orderBy: 'name' | userRecipes")
+              li(ng-repeat="recipe in recipeService.allRecipes | filter:query | orderBy: 'name' | userRecipes")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-responsive(ng-src='{{ recipe.image }}')
