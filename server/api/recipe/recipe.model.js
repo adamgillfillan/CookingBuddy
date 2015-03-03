@@ -28,7 +28,7 @@ RecipeSchema.statics.isValidName = function (name, callback) {
 RecipeSchema
   .path('name')
   .validate(function(name) {
-    return (name != '')
+    return (name !== '')
   }, 'Name cannot be blank');
 
 RecipeSchema
