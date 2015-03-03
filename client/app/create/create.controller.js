@@ -20,16 +20,15 @@ angular.module('cookingBuddy20App')
 
     $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool:   '', ready: ''}, ingredients: [], steps: [], creator: '' };
 
-    $scope.addRecipe = function () {
-      $scope.newRecipe.creator = Auth.getCurrentUser();
-      recipeService.createRecipe($scope.newRecipe);
+    //$scope.addRecipe = function () {
+    //  $scope.newRecipe.creator = Auth.getCurrentUser();
+    //  recipeService.createRecipe($scope.newRecipe);
+    //
+    //  $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' };
+    //  $scope.ingredients = [{id: 'ingredient0'}];
+    //  $scope.steps = [{id: 'step0'}];
+    //};
 
-      $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' };
-      $scope.ingredients = [{id: 'ingredient0'}];
-      $scope.steps = [{id: 'step0'}];
-    };
-    
-    $scope.recipe = {};
     $scope.errors = {};
 
     $scope.register = function(form) {
@@ -39,6 +38,7 @@ angular.module('cookingBuddy20App')
         $scope.newRecipe.creator = Auth.getCurrentUser();
         recipeService.createRecipe($scope.newRecipe)
           .catch( function(err) {
+            console.log("invalid");
             err = err.data;
             $scope.errors = {};
 
@@ -48,6 +48,9 @@ angular.module('cookingBuddy20App')
               $scope.errors[field] = error.message;
             });
           });
+        $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' };
+        $scope.ingredients = [{id: 'ingredient0'}];
+        $scope.steps = [{id: 'step0'}];
       }
     };
 
