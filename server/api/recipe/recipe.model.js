@@ -12,8 +12,8 @@ var RecipeSchema = new Schema({
         cool    : Number,
         ready   : Number
     },
-    ingredients : [String],
-    steps       : [String],
+    ingredients : { type: [String], required: true },
+    steps       : { type: [String], required: true },
     creator     : {type: mongoose.Schema.Types.Object, ref: 'User'}
 });
 
@@ -29,6 +29,12 @@ RecipeSchema
   .path('name')
   .validate(function(name) {
     return (name != '')
-  }, 'Email cannot be blank');
+  }, 'Name cannot be blank');
+
+RecipeSchema
+  .path('ingredients')
+  .validate(function(ingredients) {
+    return ''.test(ingredients);
+  }, 'Ingredients cannot be blank');
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

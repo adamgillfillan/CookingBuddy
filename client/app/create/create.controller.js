@@ -51,6 +51,8 @@ angular.module('cookingBuddy20App')
         $scope.newRecipe = { name: '', image: '', time: {prep: '', cook: '', cool: '', ready: ''}, ingredients: [], steps: [], creator: '' };
         $scope.ingredients = [{id: 'ingredient0'}];
         $scope.steps = [{id: 'step0'}];
+        $scope.submitted = false;
+        $scope.errors = '';
       }
     };
 

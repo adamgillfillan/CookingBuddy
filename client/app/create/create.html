@@ -2,6 +2,7 @@
 <div class="container">
   <h3 class="page-header">Add Recipe</h3>
   <form name="form" ng-submit="register(form)" novalidate class="form-horizontal">
+
     <!-- Name-->
     <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
       <label for="name" class="col-xs-7 col-sm-5 col-md-3 control-label">Name</label>
@@ -10,6 +11,7 @@
       </div>
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.name.$error.required && submitted">A name is required</span>
     </div>
+
     <!-- Image-->
     <div class="form-group" ng-class="{ 'has-success': form.image.$valid && submitted, 'has-error': form.image.$invalid && submitted }">
       <label for="image" class="col-xs-7 col-sm-5 col-md-3 control-label">Image</label>
@@ -19,21 +21,22 @@
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.image.$error.url && submitted">Must be a url.</span>
     </div>
 
-
     <!-- Time-->
     <div class="form-group time" ng-class="{ 'has-success': form.timeprep.$valid && submitted, 'has-error': form.timeprep.$invalid && submitted }">
       <label for="timeprep" class="col-xs-7 col-sm-5 col-md-3 control-label">Prep Time (minutes)</label>
       <div class="col-xs-5 col-sm-7 col-md-9">
-        <input ng-model="newRecipe.time.prep" type="number" name="timeprep" placeholder="10" class="form-control"/>
+        <input ng-model="newRecipe.time.prep" type="number" name="timeprep" placeholder="10" class="form-control" required/>
       </div>
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timeprep.$error.number && submitted">Must be a number.</span>
+      <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timeprep.$error.required && submitted">Prep time is required.</span>
     </div>
     <div class="form-group time" ng-class="{ 'has-success': form.timecook.$valid && submitted, 'has-error': form.timecook.$invalid && submitted }">
       <label for="timecook" class="col-xs-7 col-sm-5 col-md-3 control-label">Cook Time (minutes)</label>
       <div class="col-xs-5 col-sm-7 col-md-9">
-        <input ng-model="newRecipe.time.cook" type="number" name="timecook" placeholder="45" class="form-control"/>
+        <input ng-model="newRecipe.time.cook" type="number" name="timecook" placeholder="45" class="form-control" required/>
       </div>
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timecook.$error.number && submitted">Must be a number.</span>
+      <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timecook.$error.required && submitted">Cook time is required.</span>
     </div>
     <div class="form-group time" ng-class="{ 'has-success': form.timecool.$valid && submitted, 'has-error': form.timecool.$invalid && submitted }">
       <label for="timecool" class="col-xs-7 col-sm-5 col-md-3 control-label">Cool Time (minutes)</label>
@@ -45,11 +48,11 @@
     <div class="form-group time" ng-class="{ 'has-success': form.timeready.$valid && submitted, 'has-error': form.timeready.$invalid && submitted }">
       <label for="timeready" class="col-xs-7 col-sm-5 col-md-3 control-label">Ready in (minutes)</label>
       <div class="col-xs-5 col-sm-7 col-md-9">
-        <input ng-model="newRecipe.time.ready" type="number" name="timeready" placeholder="60" class="form-control"/>
+        <input ng-model="newRecipe.time.ready" type="number" name="timeready" placeholder="60" class="form-control" required/>
       </div>
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timeready.$error.number && submitted">Must be a number.</span>
+      <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timeready.$error.required && submitted">Ready time is required.</span>
     </div>
-
 
     <!-- Ingredients-->
     <div class="form-group" ng-class="{ 'has-success': form.ingredients.$valid && submitted, 'has-error': form.ingredients.$invalid && submitted }">
@@ -57,18 +60,23 @@
         <label for="ingredients" ng-show="$first" class="col-xs-7 col-sm-5 col-md-3 control-label">Ingredients</label>
         <div class="col-xs-7 col-sm-5 col-md-3"></div>
         <div class="col-xs-9 col-sm-7 col-md-9">
-          <input ng-model="newRecipe.ingredients[$index]" type="text" name="ingredients" placeholder="3 Eggs" class="form-control"/>
+          <input ng-model="newRecipe.ingredients[$index]" type="text" name="ingredients" placeholder="3 Eggs" class="form-control" required mongoose-error/>
+          <!--<span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.ingredients.$error.required && submitted">Ingredient is required.</span>-->
+          <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.ingredients.$error.mongoose">{{ errors.ingredients }}</span>
           <button ng-show="$last" ng-click="addNewIngredient()" type="button" class="btn btn-success">Add Ingredient</button>
         </div>
       </div>
     </div>
+
     <!-- Steps-->
     <div class="form-group" ng-class="{ 'has-success': form.steps.$valid && submitted, 'has-error': form.steps.$invalid && submitted }">
       <div ng-repeat="step in steps">
         <label for="steps" ng-show="$first" class="col-xs-7 col-sm-5 col-md-3 control-label">Steps</label>
         <div class="col-xs-7 col-sm-5 col-md-3"></div>
         <div class="col-xs-9 col-sm-7 col-md-9">
-          <input ng-model="newRecipe.steps[$index]" type="text" name="steps" placeholder="Beat eggs until a smooth consistency." class="form-control"/>
+          <input ng-model="newRecipe.steps[$index]" type="text" name="steps" placeholder="Beat eggs until a smooth consistency." class="form-control" required mongoose-error/>
+          <!--<span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.steps.$error.required && submitted">Prep time is required.</span>-->
+          <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.steps.$error.mongoose">{{ errors.steps }}</span>
           <button ng-show="$last" ng-click="addNewStep()" type="button" class="btn btn-success">Add Step</button>
         </div>
       </div>
