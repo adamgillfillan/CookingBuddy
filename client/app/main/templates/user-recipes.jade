@@ -9,7 +9,7 @@ block content
   .container
     .row
       .col-lg-12
-        h1.page-header Recipes:
+        h1.page-header My Recipes:
           span.small
             form.form-inline.pull-right
               input(ng-model='query', type='text', placeholder='Search', autofocus='')
@@ -19,4 +19,4 @@ block content
               li(ng-repeat="recipe in recipeService.allRecipes | filter:query | orderBy: 'name' | userRecipes")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-responsive(ng-src='{{ recipe.image }}')
-                button.btn.btn-primary(type='submit', ng-click='deleteRecipe(recipe._id)') Delete
+                button.btn.btn-primary(type='submit', ng-click='deleteRecipe(recipe)') Delete
