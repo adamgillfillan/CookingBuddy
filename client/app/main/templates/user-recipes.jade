@@ -19,3 +19,4 @@ block content
               li(ng-repeat="recipe in recipeService.allRecipes | filter:query | orderBy: 'name' | userRecipes")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-responsive(ng-src='{{ recipe.image }}')
+                button.btn.btn-primary(type='submit', ng-click='deleteRecipe(recipe._id)') Delete

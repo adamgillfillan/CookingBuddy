@@ -23,9 +23,8 @@ angular.module('cookingBuddy20App')
       $location.path('/' + recipe._id);
     };
 
-    $scope.deleteRecipe = function () {
-      recipeService.deleteRecipe(recipeService.currRecipe._id);
-      $location.path('/');
+    $scope.deleteRecipe = function (id) {
+      recipeService.deleteRecipe(id);
     };
 
   });
