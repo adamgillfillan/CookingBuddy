@@ -14,7 +14,7 @@
 
     <!-- Image-->
     <div class="form-group" ng-class="{ 'has-success': form.image.$valid && submitted, 'has-error': form.image.$invalid && submitted }">
-      <label for="image" class="col-xs-7 col-sm-5 col-md-3 control-label">Image</label>
+      <label for="image" class="col-xs-7 col-sm-5 col-md-3 control-label">Image <span class="text-muted">(optional)</span></label>
       <div class="col-xs-5 col-sm-7 col-md-9">
         <input ng-model="newRecipe.image" name="image" type="url" placeholder="Image URL" class="form-control"/>
       </div>
@@ -23,7 +23,7 @@
 
     <!-- Time-->
     <div class="form-group time" ng-class="{ 'has-success': form.timeprep.$valid && submitted, 'has-error': form.timeprep.$invalid && submitted }">
-      <label for="timeprep" class="col-xs-7 col-sm-5 col-md-3 control-label">Prep Time (minutes)</label>
+      <label for="timeprep" class="col-xs-7 col-sm-5 col-md-3 control-label">Prep Time <span class="text-muted">(minutes)</span></label>
       <div class="col-xs-5 col-sm-7 col-md-9">
         <input ng-model="newRecipe.time.prep" type="number" name="timeprep" placeholder="10" class="form-control" required/>
       </div>
@@ -31,7 +31,7 @@
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timeprep.$error.required && submitted">Prep time is required.</span>
     </div>
     <div class="form-group time" ng-class="{ 'has-success': form.timecook.$valid && submitted, 'has-error': form.timecook.$invalid && submitted }">
-      <label for="timecook" class="col-xs-7 col-sm-5 col-md-3 control-label">Cook Time (minutes)</label>
+      <label for="timecook" class="col-xs-7 col-sm-5 col-md-3 control-label">Cook Time <span class="text-muted">(minutes)</span></label>
       <div class="col-xs-5 col-sm-7 col-md-9">
         <input ng-model="newRecipe.time.cook" type="number" name="timecook" placeholder="45" class="form-control" required/>
       </div>
@@ -39,14 +39,14 @@
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timecook.$error.required && submitted">Cook time is required.</span>
     </div>
     <div class="form-group time" ng-class="{ 'has-success': form.timecool.$valid && submitted, 'has-error': form.timecool.$invalid && submitted }">
-      <label for="timecool" class="col-xs-7 col-sm-5 col-md-3 control-label">Cool Time (minutes)</label>
+      <label for="timecool" class="col-xs-7 col-sm-5 col-md-3 control-label">Cool Time <span class="text-muted">(minutes)</span></label>
       <div class="col-xs-5 col-sm-7 col-md-9">
         <input ng-model="newRecipe.time.cool" type="number" name="timecool" placeholder="5" class="form-control"/>
       </div>
       <span class="help-block col-xs-5 col-sm-7 col-md-9" ng-show="form.timecool.$error.number && submitted">Must be a number.</span>
     </div>
     <div class="form-group time" ng-class="{ 'has-success': form.timeready.$valid && submitted, 'has-error': form.timeready.$invalid && submitted }">
-      <label for="timeready" class="col-xs-7 col-sm-5 col-md-3 control-label">Ready in (minutes)</label>
+      <label for="timeready" class="col-xs-7 col-sm-5 col-md-3 control-label">Ready in <span class="text-muted">(minutes)</span></label>
       <div class="col-xs-5 col-sm-7 col-md-9">
         <input ng-model="newRecipe.time.ready" type="number" name="timeready" placeholder="60" class="form-control" required/>
       </div>

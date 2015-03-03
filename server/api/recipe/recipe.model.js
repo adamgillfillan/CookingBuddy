@@ -31,10 +31,10 @@ RecipeSchema
     return (name !== '')
   }, 'Name cannot be blank');
 
-RecipeSchema
-  .path('ingredients')
-  .validate(function(ingredients) {
-    return ''.test(ingredients);
-  }, 'Ingredients cannot be blank');
+//RecipeSchema
+//  .path('ingredients')
+//  .validate(function(ingredients) {
+//    return ''.test(ingredients);
+//  }, 'Ingredients cannot be blank');
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
