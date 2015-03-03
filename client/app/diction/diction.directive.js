@@ -46,7 +46,6 @@ angular.module('cookingBuddy20App')
                 var beginRecognition = function() {
                     dictionService.recognizing = true;
                     dictionService.recognition.start();
-                    // dictionService.beginRecognition();
                 };
 
                 var changeStepStyling = function(step, color, size) {
@@ -55,7 +54,6 @@ angular.module('cookingBuddy20App')
                 };
 
                 var handleUtterance = function(message) {
-                    
                     dictionService.recognizing = false;
                     dictionService.recognition.stop();
                     dictionService.speakMessage(message);
@@ -68,7 +66,6 @@ angular.module('cookingBuddy20App')
                         function(newValue, oldValue) {
                             console.log(oldValue, newValue);
                             if (newValue >= 0 && oldValue < 0){
-                                // changeStepStyling(oldValue, "", "1em");
                                 changeStepStyling(newValue, "red", "2em");
                             } else if (newValue >= 0 && oldValue >= 0){
                                 changeStepStyling(oldValue, "", "1em");
@@ -97,6 +94,15 @@ angular.module('cookingBuddy20App')
                 // if increment is true, increment the currentStep.
                 // else set currentStep to value
                 var handleMatch = function(regex, value, increment) {
+                    //console.log(regex);
+                    //if ((regex == '/next/i') && finished){
+                    //    message = "There are no more steps in your recipe."
+                    //    handleUtterance(message);
+                    //}
+                    //else if ((regex == '/back/i') && recipeService.currentStep <= 0){
+                    //    message = "I can't go back yet."
+                    //    handleUtterance(message);
+                    //}
                     if (final_transcript.match(regex)){
                         dictionService.actionTaken = "something";
                         if (increment)
@@ -106,6 +112,7 @@ angular.module('cookingBuddy20App')
                         message = recipeService.currRecipe.steps[recipeService.currentStep];
                         handleUtterance(message);
                     };
+
                 };
 
                 var handleMatchIngredients = function() {
@@ -128,32 +135,50 @@ angular.module('cookingBuddy20App')
                 };
 
                 var handleMatches = function() {
+                    dictionService.actionTaken = "nothing";
                     if (final_transcript != ""){
+                        console.log("CurrentStep: " + recipeService.currentStep);
+                        console.log("Length: " + recipeService.currRecipe.steps.length);
                         console.log(final_transcript);
-                        
+
+                        if (recipeService.currentStep == recipeService.currRecipe.steps.length - 1){
+                            finished = true;
+                            console.log("Finished!");
+                        }
+                        if (recipeService.currentStep != recipeService.currRecipe.steps.length - 1){
+                            finished = false;
+                        }
+
                         /* Handle regex matching */
+                        if(!finished){
+                            handleMatch(/next/i, 1, true);
+                        }
                         handleMatch(/first/i, 0, false);
-                        handleMatch(/next/i, 1, true);
                         handleMatch(/repeat/i, recipeService.currentStep, false);
 
                         if (recipeService.currentStep > 0)
                             handleMatch(/back/i, recipeService.currentStep-1, false);
-                        
+
                         var re = /step (\d+)/i;
                         //var re = /step/i;
                         var go_to = final_transcript.match(re);
                         if (go_to){
                             console.log("matched")
-                            handleMatch(re, go_to[1]-1, false);
+                            if ((go_to[1] -1 >= recipeService.currRecipe.steps.length) || (go_to[1] -1 < 0)) {
+                                message = "You can't go to that step.";
+                                handleUtterance(message);
+                            }
+                            else
+                                handleMatch(re, go_to[1]-1, false);
                         }
-                        
+
                         handleMatchIngredients();
 
                         handleWatchAndListen();
 
                         // checks if back keyword is in transcript && also not at the start of the recipe
                         //if (final_transcript.match(/Cooking Buddy(.*)back/i) && current_step != 0){
-                        
+
                     };
                 }
 
@@ -199,12 +224,6 @@ angular.module('cookingBuddy20App')
                     dictionService.actionTaken = "nothing";
                     buildTranscript();
                     handleMatches();
-
-                    // $.bootstrapGrowl(final_transcript, {
-                    //     type: (dictionService.actionTaken === "nothing") ? "danger" : "success",
-                    //     width: 'auto'
-                    // });
-
                     notifyMessage();
                 };
             });

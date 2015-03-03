@@ -6,21 +6,18 @@ block content
     .row
       .col-xs-12.col-sm-5.col-md-4
         img#img1.img-responsive(ng-src='{{recipeService.currRecipe.image}}')
-        h3
+        h4.alert.alert-info
           strong Ingredients
-        h4
+        h5
           // <ul id="ingredients_list" ng-repeat="ingredient in recipeService.currRecipe.ingredients">
           ul(ng-repeat='ingredient in recipeService.currRecipe.ingredients')
             li {{ ingredient }}
       .col-xs-12.col-sm-7.col-md-8
         #results(ng-controller='DictionCtrl as diction')
-          h3
+          h3.alert.alert-info
             strong Steps
           h4
-            // <ol type="1" id="steps_list">
-            // <ol my-dialog>
             ol
-              // <li add-styling="current-step" remove-styling id="steps_list{{$index}}" ng-repeat="step in recipeService.currRecipe.steps">{{ step }} </li>
               li(id='steps_list{{$index}}', ng-repeat='step in recipeService.currRecipe.steps') {{ step }}
           button#start_button.btn.btn-primary(type='button', my-dialog='') Begin
           &nbsp;&nbsp;&nbsp;
