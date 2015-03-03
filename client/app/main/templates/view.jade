@@ -12,6 +12,8 @@ block content
           // <ul id="ingredients_list" ng-repeat="ingredient in recipeService.currRecipe.ingredients">
           ul(ng-repeat='ingredient in recipeService.currRecipe.ingredients')
             li {{ ingredient }}
+
+        span.label.label-success Created by: {{ recipeService.currRecipe.creator.name }}
       .col-xs-12.col-sm-7.col-md-8
         #results(ng-controller='DictionCtrl as diction')
           h3.alert.alert-info
