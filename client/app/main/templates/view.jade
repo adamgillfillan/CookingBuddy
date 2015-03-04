@@ -19,6 +19,7 @@ block content
 
         span.label.label-success Created by: {{ recipeService.currRecipe.creator.name }}
       .col-xs-12.col-sm-7.col-md-8
+        //i.fa.fa-refresh.fa-spin.fa-4x
         #results(ng-controller='DictionCtrl as diction')
           h3.alert.alert-info
             strong Steps
@@ -26,12 +27,16 @@ block content
             ol
               li(id='steps_list{{$index}}', ng-repeat='step in recipeService.currRecipe.steps') {{ step }}
           button#start_button.btn.btn-primary(type='button', my-dialog='') Begin
-          //&nbsp;&nbsp;&nbsp;
+
           //button.btn.btn-info(type='button', data-toggle='modal', data-target='.bs-example-modal-sm') Tips
-          div(ng-controller='ViewCtrl')
+
+
+
+          &nbsp;&nbsp;&nbsp;
+          span(ng-controller='ViewCtrl')
             script(type='text/ng-template', id='myModalContent.html').
               <div class="modal-header">
-              <h4 class="modal-title">CookingBuddy Commands!</h4>
+              <h4 class="modal-title">Try asking CookingBuddy:</h4>
               </div>
               <div class="modal-body">
               <ul>
@@ -39,8 +44,7 @@ block content
               </ul>
               </div>
               <div class="modal-footer">
-              <button class="btn btn-primary" ng-click="ok()">OK</button>
-              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              <button class="btn btn-primary" ng-click="ok()">Got it</button>
               </div>
-            button.btn.btn-default(ng-click="open('sm')") Small modal
+            button.btn.btn-info(ng-click="open('sm')") Tips
             //div(ng-show='selected') Selection from a modal: {{ selected }}

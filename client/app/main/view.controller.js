@@ -4,8 +4,13 @@ angular.module('cookingBuddy20App')
     //$scope.modal = $modal({title: 'My Title', content: 'My Content', show: true});
     //var modal = $modal({title: 'My Title', content: 'hello'});
 
-    $scope.items = ['item1', 'item2', 'item3'];
-
+    //$scope.items = ['item1', 'item2', 'item3'];
+    $scope.items = ['What is first?',
+                    'What is next?',
+                    'Go back.',
+                    'Repeat that.',
+                    'Go to step 5.',
+                    'How many eggs do I need?'];
     $scope.open = function (size) {
 
       var modalInstance = $modal.open({
@@ -18,7 +23,7 @@ angular.module('cookingBuddy20App')
           }
         }
       });
-      
+
       modalInstance.result.then(function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -30,8 +35,7 @@ angular.module('cookingBuddy20App')
 
     $scope.items = items;
 
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    $scope.ok = function () {
+      $modalInstance.dismiss('done');
     };
   });
-
