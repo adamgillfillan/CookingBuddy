@@ -17,7 +17,6 @@ block content
           ul(ng-repeat='ingredient in recipeService.currRecipe.ingredients')
             li {{ ingredient }}
 
-        span.label.label-success Created by: {{ recipeService.currRecipe.creator.name }}
       .col-xs-12.col-sm-7.col-md-8
         //i.fa.fa-refresh.fa-spin.fa-4x
         #results(ng-controller='DictionCtrl as diction')
@@ -48,3 +47,5 @@ block content
               </div>
             button.btn.btn-info(ng-click="open('sm')") Tips
             //div(ng-show='selected') Selection from a modal: {{ selected }}
+      .col-xs-12
+        span.label.label-success Created by: {{ recipeService.currRecipe.creator.name }}
