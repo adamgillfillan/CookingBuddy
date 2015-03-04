@@ -23,13 +23,23 @@ body {
   font-family: "Raleway"
 }
 h2,h3,h4,label,.page-header {
-  color: #4d80b7;
+  color: #4393B9;
+}
+.tooltip-inner{
+//  background-color: red !important;
+  background-color: #4393B9 !important;
+}
+.tooltip-arrow{
+  border-top-color: #4393B9 !important;
 }
 .navbar > .container .navbar-brand, .navbar{
-  color: #4d80b7;
+  color: #4393B9;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #4d80b7;
+  color: #4393B9;
+}
+.navbar-default .navbar-text {
+  color: #4393B9;
 }
 // Component styles are injected through grunt
 // injector

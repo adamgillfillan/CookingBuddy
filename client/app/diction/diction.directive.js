@@ -66,10 +66,10 @@ angular.module('cookingBuddy20App')
                         function(newValue, oldValue) {
                             console.log(oldValue, newValue);
                             if (newValue >= 0 && oldValue < 0){
-                                changeStepStyling(newValue, "red", "2em");
+                                changeStepStyling(newValue, "#4393B9", "2em");
                             } else if (newValue >= 0 && oldValue >= 0){
                                 changeStepStyling(oldValue, "", "1em");
-                                changeStepStyling(newValue, "red", "2em");
+                                changeStepStyling(newValue, "#4393B9", "2em");
                             }
                         }
                     );
