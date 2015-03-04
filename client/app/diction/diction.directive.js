@@ -28,7 +28,10 @@ angular.module('cookingBuddy20App')
                     recognition.start();
                 }
                 else{
-                    alert("not here");
+                    alert("You must use Chrome for this to work! " +
+                    "Google is ahead of the game and no other browser supports this. " +
+                    "Also, iPhone and iPad does not support HTML5 Web Speech Recognition. " +
+                    "Sorry. Blame Apple. I want to use CookingBuddy on an iPad, too! Try CookingBuddy on any other device!");
                 }
 
                 recognition.onstart = function() {
