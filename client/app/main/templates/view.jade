@@ -2,6 +2,10 @@ extends ../layout
 
 block content
   .container
+    .modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+      .modal-dialog.modal-sm
+        .modal-content
+          | Modal Content
     h1.page-header {{ recipeService.currRecipe.name }}
     .row
       .col-xs-12.col-sm-5.col-md-4
@@ -22,5 +26,6 @@ block content
             ol
               li(id='steps_list{{$index}}', ng-repeat='step in recipeService.currRecipe.steps') {{ step }}
           button#start_button.btn.btn-primary(type='button', my-dialog='') Begin
-          &nbsp;&nbsp;&nbsp;
-          button.btn.btn-info(type='button') Tips
+          //&nbsp;&nbsp;&nbsp;
+          //button.btn.btn-info(type='button', data-toggle='modal', data-target='.bs-example-modal-sm') Tips
+
