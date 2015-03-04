@@ -14,13 +14,18 @@ block content
             form.form-inline.pull-right
               input(ng-model='query', type='text', placeholder='Search', autofocus='')
         .row
-          .col-sm-6.col-md-6.col-lg-6
+          .col-sm-4.col-md-4.col-lg-4
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: recipeService.allRecipes.length/2 | filter:query | orderBy: 'name'")
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo : recipeService.allRecipes.length/3 | filter:query | orderBy: 'name'")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
-                img.img-responsive(ng-src='{{ recipe.image }}')
-          .col-sm-6.col-md-6.col-lg-6
+                img.img-rounded.img-responsive(ng-src='{{ recipe.image }}')
+          .col-sm-4.col-md-4.col-lg-4
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat="recipe in recipeService.allRecipes | limitTo: -recipeService.allRecipes.length/2 | filter:query | orderBy: 'name'")
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo : (recipeService.allRecipes.length/3) : 10 | filter:query | orderBy: 'name'")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
-                img.img-responsive(ng-src='{{ recipe.image }}')
+                img.img-rounded.img-responsive(ng-src='{{ recipe.image }}')
+          .col-sm-4.col-md-4.col-lg-4
+            ul.nav.nav-tabs.nav-stacked
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo : (recipeService.allRecipes.length/3) : (recipeService.allRecipes.length/3)*2 | filter:query | orderBy: 'name'")
+                a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
+                img.img-rounded.img-responsive(ng-src='{{ recipe.image }}')
