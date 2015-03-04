@@ -18,10 +18,8 @@ angular.module('cookingBuddy20App')
           }
         }
       });
-
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
+      
+      modalInstance.result.then(function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
@@ -31,13 +29,6 @@ angular.module('cookingBuddy20App')
   .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
     $scope.items = items;
-    $scope.selected = {
-      item: $scope.items[0]
-    };
-
-    $scope.ok = function () {
-      $modalInstance.close($scope.selected.item);
-    };
 
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');

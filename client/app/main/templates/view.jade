@@ -31,15 +31,12 @@ block content
           div(ng-controller='ViewCtrl')
             script(type='text/ng-template', id='myModalContent.html').
               <div class="modal-header">
-              <h3 class="modal-title">I'm a modal!</h3>
+              <h4 class="modal-title">CookingBuddy Commands!</h4>
               </div>
               <div class="modal-body">
               <ul>
-              <li ng-repeat="item in items">
-              <a ng-click="selected.item = item">{{ item }}</a>
-              </li>
+              <li ng-repeat="item in items">{{ item }}</li>
               </ul>
-              Selected: <b>{{ selected.item }}</b>
               </div>
               <div class="modal-footer">
               <button class="btn btn-primary" ng-click="ok()">OK</button>
@@ -47,4 +44,3 @@ block content
               </div>
             button.btn.btn-default(ng-click="open('sm')") Small modal
             //div(ng-show='selected') Selection from a modal: {{ selected }}
-
