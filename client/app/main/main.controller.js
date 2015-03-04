@@ -27,4 +27,6 @@ angular.module('cookingBuddy20App')
       recipeService.deleteRecipe(recipe._id);
     };
 
+
+
   });

@@ -4,11 +4,11 @@ angular.module('cookingBuddy20App')
   	var service = {};
   	service.recognizing = false;
     service.actionTaken = 'nothing';
-  	
+
   	service.createRecognitionObject = function(){
   		service.recognition = new webkitSpeechRecognition();
   	};
-  	
+
   	service.beginRecognition = function(){
         service.recognition.start();
         service.recognizing = true;

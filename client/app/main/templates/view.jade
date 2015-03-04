@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   .container
-    .modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
-      .modal-dialog.modal-sm
-        .modal-content
-          | Modal Content
+    //.modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+    //  .modal-dialog.modal-sm
+    //    .modal-content
+    //      | Modal Content
     h1.page-header {{ recipeService.currRecipe.name }}
     .row
       .col-xs-12.col-sm-5.col-md-4
@@ -28,4 +28,23 @@ block content
           button#start_button.btn.btn-primary(type='button', my-dialog='') Begin
           //&nbsp;&nbsp;&nbsp;
           //button.btn.btn-info(type='button', data-toggle='modal', data-target='.bs-example-modal-sm') Tips
+          div(ng-controller='ViewCtrl')
+            script(type='text/ng-template', id='myModalContent.html').
+              <div class="modal-header">
+              <h3 class="modal-title">I'm a modal!</h3>
+              </div>
+              <div class="modal-body">
+              <ul>
+              <li ng-repeat="item in items">
+              <a ng-click="selected.item = item">{{ item }}</a>
+              </li>
+              </ul>
+              Selected: <b>{{ selected.item }}</b>
+              </div>
+              <div class="modal-footer">
+              <button class="btn btn-primary" ng-click="ok()">OK</button>
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              </div>
+            button.btn.btn-default(ng-click="open('sm')") Small modal
+            //div(ng-show='selected') Selection from a modal: {{ selected }}
 
