@@ -21,7 +21,7 @@ block content
                 img.img-rounded.img-responsive(ng-src='{{ recipe.image }}')
           .col-sm-4.col-md-4.col-lg-4
             ul.nav.nav-tabs.nav-stacked
-              li(ng-repeat="recipe in recipeService.allRecipes | limitTo : (recipeService.allRecipes.length/3) : 10 | filter:query | orderBy: 'name'")
+              li(ng-repeat="recipe in recipeService.allRecipes | limitTo : (recipeService.allRecipes.length/3) : recipeService.allRecipes.length/3 | filter:query | orderBy: 'name'")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
                 img.img-rounded.img-responsive(ng-src='{{ recipe.image }}')
           .col-sm-4.col-md-4.col-lg-4
