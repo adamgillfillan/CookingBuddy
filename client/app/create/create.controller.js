@@ -36,11 +36,11 @@ angular.module('cookingBuddy20App')
 
       if(form.$valid) {
         $scope.newRecipe.creator = Auth.getCurrentUser();
-        if($scope.newRecipe.image == '')
+        if($scope.newRecipe.image === '')
           $scope.newRecipe.image = 'assets/images/yeoman.png';
         recipeService.createRecipe($scope.newRecipe)
           .catch( function(err) {
-            console.log("invalid");
+            console.log('invalid');
             err = err.data;
             $scope.errors = {};
 

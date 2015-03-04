@@ -1,5 +1,7 @@
+'use strict';
+
 angular.module('cookingBuddy20App')
-  .factory('dictionService', ['$q', '$http', function ($q, $http) {
+  .factory('dictionService', [ function() {
 
   	var service = {};
   	service.recognizing = false;

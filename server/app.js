@@ -35,4 +35,5 @@ server.listen(config.port, config.ip, function () {
 });
 
 // Expose app
+var exports;
 exports = module.exports = app;

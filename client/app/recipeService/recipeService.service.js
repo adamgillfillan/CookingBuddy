@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cookingBuddy20App')
-  .factory('recipeService', ['$q', '$http', '$rootScope', '$location', function ($q, $http, $rootScope, $location, Auth) {
+  .factory('recipeService', ['$q', '$http', '$rootScope', '$location', function ($q, $http, $rootScope, $location) {
 
     var service = {};
 
@@ -66,8 +66,8 @@ angular.module('cookingBuddy20App')
     };
 
     service.getAllUserRecipes = function(){
-      return service.allRecipes.filter()
-    }
+      return service.allRecipes.filter();
+    };
 
 
     // service.saveState = function () {

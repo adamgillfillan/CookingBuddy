@@ -14,10 +14,10 @@ angular.module('cookingBuddy20App')
                     var recognition = dictionService.recognition;
                     var finished = false;
                     var results;
-                    var interim_transcript = '';
-                    var final_transcript = '';
+                    var interimTranscript = '';
+                    var finalTranscript = '';
                     var message = '';
-                    // var go_to = '';
+                    // var goTo = '';
                     //var display_step = current_step + 1;
                     if (dictionService.recognizing) {
                       dictionService.recognizing = false;
@@ -28,10 +28,10 @@ angular.module('cookingBuddy20App')
                     recognition.start();
                 }
                 else{
-                    alert("You must use Chrome for this to work! " +
-                    "Google is ahead of the game and no other browser supports this. " +
-                    "Also, iPhone and iPad does not support HTML5 Web Speech Recognition. " +
-                    "Sorry. Blame Apple. I want to use CookingBuddy on an iPad, too! Try CookingBuddy on any other device!");
+                    alert('You must use Chrome for this to work! ' +
+                    'Google is ahead of the game and no other browser supports this. ' +
+                    'Also, iPhone and iPad does not support HTML5 Web Speech Recognition. ' +
+                    'Sorry. Blame Apple. I want to use CookingBuddy on an iPad, too! Try CookingBuddy on any other device!');
                 }
 
                 recognition.onstart = function() {
@@ -39,11 +39,11 @@ angular.module('cookingBuddy20App')
                 };
                 recognition.onerror = function(event) {
                     console.log(event.error);
-                    final_transcript = '';
+                    finalTranscript = '';
                 };
                 recognition.onend = function() {
                     if(dictionService.recognizing)
-                    dictionService.recognition.start();
+                      dictionService.recognition.start();
                 };
 
                 var beginRecognition = function() {
@@ -52,8 +52,8 @@ angular.module('cookingBuddy20App')
                 };
 
                 var changeStepStyling = function(step, color, size) {
-                    document.getElementById("steps_list"+step).style.color = color;
-                    document.getElementById("steps_list"+step).style.fontSize = size;
+                    document.getElementById('steps_list'+step).style.color = color;
+                    document.getElementById('steps_list'+step).style.fontSize = size;
                 };
 
                 var handleUtterance = function(message) {
@@ -65,14 +65,14 @@ angular.module('cookingBuddy20App')
                 };
 
                 var handleWatchAndListen = function() {
-                    scope.$watch(function(scope) { return recipeService.currentStep },
+                    scope.$watch(function(scope) { return recipeService.currentStep; },
                         function(newValue, oldValue) {
                             console.log(oldValue, newValue);
                             if (newValue >= 0 && oldValue < 0){
-                                changeStepStyling(newValue, "#4393B9", "2em");
+                                changeStepStyling(newValue, '#4393B9', '2em');
                             } else if (newValue >= 0 && oldValue >= 0){
-                                changeStepStyling(oldValue, "", "1em");
-                                changeStepStyling(newValue, "#4393B9", "2em");
+                                changeStepStyling(oldValue, '', '1em');
+                                changeStepStyling(newValue, '#4393B9', '2em');
                             }
                         }
                     );
@@ -80,16 +80,16 @@ angular.module('cookingBuddy20App')
                 };
 
                 var buildTranscript = function() {
-                    interim_transcript = '';
+                    interimTranscript = '';
                     results = '';
-                    final_transcript = '';
+                    finalTranscript = '';
                     for (var i = event.resultIndex; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
                             results = event.results[i];
-                            final_transcript += event.results[i][0].transcript;
+                            finalTranscript += event.results[i][0].transcript;
                             console.log(event.results[i])
                         } else {
-                            interim_transcript += event.results[i][0].transcript;
+                            interimTranscript += event.results[i][0].transcript;
                         }
                     };
                 };
@@ -106,8 +106,8 @@ angular.module('cookingBuddy20App')
                     //    message = "I can't go back yet."
                     //    handleUtterance(message);
                     //}
-                    if (final_transcript.match(regex)){
-                        dictionService.actionTaken = "something";
+                    if (finalTranscript.match(regex)){
+                        dictionService.actionTaken = 'something';
                         if (increment)
                             recipeService.currentStep += 1;
                         else
@@ -121,34 +121,34 @@ angular.module('cookingBuddy20App')
                 var handleMatchIngredients = function() {
                     // matches "$item in ingredients pattern: '$quantity $measurement $item'"
                     var re_3 = /How (many|much) (.*) do I need/i;
-                    var question = final_transcript.match(re_3);
+                    var question = finalTranscript.match(re_3);
                     if (question){
                         for(var j = 0; j < recipeService.currRecipe.ingredients.length; j++){
-                            console.log("ingredients: " + recipeService.currRecipe.ingredients[j]);
+                            console.log('ingredients: ' + recipeService.currRecipe.ingredients[j]);
                             if(recipeService.currRecipe.ingredients[j].toLowerCase().indexOf(question[2]) > -1) {
-                                console.log("made it to a question pt 2");
-                                message = "You need " + recipeService.currRecipe.ingredients[j];
+                                console.log('made it to a question pt 2');
+                                message = 'You need ' + recipeService.currRecipe.ingredients[j];
                                 console.log(message);
                                 break;
                             }
                         }
-                        dictionService.actionTaken = "something";
+                        dictionService.actionTaken = 'something';
                         handleUtterance(message);
                     }
                 };
 
                 var handleMatches = function() {
-                    dictionService.actionTaken = "nothing";
-                    if (final_transcript != ""){
-                        console.log("CurrentStep: " + recipeService.currentStep);
-                        console.log("Length: " + recipeService.currRecipe.steps.length);
-                        console.log(final_transcript);
+                    dictionService.actionTaken = 'nothing';
+                    if (finalTranscript !== ''){
+                        console.log('CurrentStep: ' + recipeService.currentStep);
+                        console.log('Length: ' + recipeService.currRecipe.steps.length);
+                        console.log(finalTranscript);
 
-                        if (recipeService.currentStep == recipeService.currRecipe.steps.length - 1){
+                        if (recipeService.currentStep === recipeService.currRecipe.steps.length - 1){
                             finished = true;
-                            console.log("Finished!");
+                            console.log('Finished!');
                         }
-                        if (recipeService.currentStep != recipeService.currRecipe.steps.length - 1){
+                        if (recipeService.currentStep !== recipeService.currRecipe.steps.length - 1){
                             finished = false;
                         }
 
@@ -164,15 +164,15 @@ angular.module('cookingBuddy20App')
 
                         var re = /step (\d+)/i;
                         //var re = /step/i;
-                        var go_to = final_transcript.match(re);
-                        if (go_to){
-                            console.log("matched")
-                            if ((go_to[1] -1 >= recipeService.currRecipe.steps.length) || (go_to[1] -1 < 0)) {
-                                message = "You can't go to that step.";
+                        var goTo = finalTranscript.match(re);
+                        if (goTo){
+                            console.log('matched')
+                            if ((goTo[1] -1 >= recipeService.currRecipe.steps.length) || (goTo[1] -1 < 0)) {
+                                message = 'You can\'t go to that step.';
                                 handleUtterance(message);
                             }
                             else
-                                handleMatch(re, go_to[1]-1, false);
+                                handleMatch(re, goTo[1]-1, false);
                         }
 
                         handleMatchIngredients();
@@ -180,21 +180,21 @@ angular.module('cookingBuddy20App')
                         handleWatchAndListen();
 
                         // checks if back keyword is in transcript && also not at the start of the recipe
-                        //if (final_transcript.match(/Cooking Buddy(.*)back/i) && current_step != 0){
+                        //if (finalTranscript.match(/Cooking Buddy(.*)back/i) && current_step != 0){
 
                     };
                 }
 
                 var notifyMessage = function() {
                     $.notify({
-                        title: (dictionService.actionTaken === "nothing") ? "No Action: " : "Action Taken!",
-                        message: final_transcript,
+                        title: (dictionService.actionTaken === 'nothing') ? 'No Action: ' : 'Action Taken!',
+                        message: finalTranscript,
                     },{
-                        type: (dictionService.actionTaken === "nothing") ? "danger" : "success",
+                        type: (dictionService.actionTaken === 'nothing') ? 'danger' : 'success',
                         allow_dismiss: true,
                         placement: {
-                            from: "top",
-                            align: "center"
+                            from: 'top',
+                            align: 'center'
                         },
                         offset: {
                             x: 20,

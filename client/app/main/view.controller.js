@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('cookingBuddy20App')
   .controller('ViewCtrl', function ($scope, $modal, $log) {
 
