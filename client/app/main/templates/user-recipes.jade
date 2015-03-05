@@ -18,7 +18,7 @@ block content
             ul.nav.nav-tabs.nav-stacked
               li(ng-repeat="recipe in recipeService.allRecipes | filter:query | orderBy: 'name' | userRecipes")
                 a(href='', tooltip='{{recipe.name}}', ng-click='viewRecipe(recipe)') {{recipe.name}}
-                img.img-responsive(ng-src='{{ recipe.image }}')
+                img.img-responsive(ng-src='{{ recipe.image }}', ng-click='viewRecipe(recipe)')
                 //button.btn.btn-primary(type='submit', ng-click='deleteRecipe(recipe)') Delete
                 button.btn.btn-danger.btn-sm(type='submit', ng-click='deleteRecipe(recipe)')
                   span.glyphicon.glyphicon-remove
