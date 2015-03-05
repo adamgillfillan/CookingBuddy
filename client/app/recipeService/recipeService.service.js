@@ -20,8 +20,8 @@ angular.module('cookingBuddy20App')
     service.getRecipe = function (recipeId) {
       return $http.get('/api/recipes/' + recipeId)
         .success(function (recipe) {
-          console.log(recipe);
-          console.log(recipe.creator);
+          //console.log(recipe);
+          //console.log(recipe.creator);
           service.currRecipe = recipe;
         });
     };
@@ -60,7 +60,7 @@ angular.module('cookingBuddy20App')
       var recipeId = $location.path();
       return $http.get('/api/recipes/' + recipeId)
         .success(function (recipe) {
-          console.log(recipe);
+          //console.log(recipe);
           service.currRecipe = recipe;
         });
     };
