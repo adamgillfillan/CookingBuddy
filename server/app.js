@@ -19,6 +19,11 @@ mongoose.connect(config.mongo.uri, config.mongo.options);
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 
+//var env = process.env.NODE_ENV;
+//if(config.seedDB){
+//  if ('production' === env) { require('./config/seed-prod'); }
+//  if ('development' === env || 'test' === env) { require('./config/seed'); }
+//}
 var options = {
   pfx: fs.readFileSync(__dirname + '/server.pfx'),
   passphrase: 'password'

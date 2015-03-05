@@ -18,10 +18,8 @@ var RecipeSchema = new Schema({
 });
 
 RecipeSchema.statics.isValidName = function (name, callback) {
-    if (name) {
-        return true;
-    }
-    return false;
+    return !!name;
+
 };
 
 // Validate empty name
