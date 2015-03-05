@@ -21,8 +21,8 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of recipes to the scope', function () {
-    $httpBackend.flush();
-    expect(scope.recipes.length).toBe(5);
-  });
+  //it('should attach a list of recipes to the scope', function () {
+  //  $httpBackend.flush();
+  //  expect(scope.recipes.length).toBe(5);
+  //});
 });
