@@ -14,7 +14,7 @@ angular.module('cookingBuddy20App')
     };
 
     $scope.addNewStep = function () {
-      var newItemNo = $scope.ingredients.length + 1;
+      var newItemNo = $scope.steps.length + 1;
       $scope.steps.push({'id':'step'+newItemNo});
     };
 

@@ -70,7 +70,7 @@ angular.module('cookingBuddy20App')
     };
 
     service.updateRecipe = function(recipe){
-      service.curRecipe = recipe;
+      service.currRecipe = recipe;
     };
 
 
