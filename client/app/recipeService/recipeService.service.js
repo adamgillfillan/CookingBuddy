@@ -69,6 +69,10 @@ angular.module('cookingBuddy20App')
       return service.allRecipes.filter();
     };
 
+    service.updateRecipe = function(recipe){
+      service.curRecipe = recipe;
+    };
+
 
     // service.saveState = function () {
     //   sessionStorage.recipeService = angular.toJson(service.state);

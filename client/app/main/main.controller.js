@@ -28,9 +28,8 @@ angular.module('cookingBuddy20App')
     };
 
     $scope.updateRecipe = function (recipe){
+      $location.path('/update');
       recipeService.updateRecipe(recipe)
     }
-
-
 
   });
