@@ -46,7 +46,7 @@ angular.module('cookingBuddy20App')
     };
 
     service.editRecipe = function (recipeObj) {
-      return $http.put('/api/recipes', recipeObj)
+      return $http.put('/api/recipes/' + recipeObj._id, recipeObj)
         .success(function (data) {
           console.log('Success Creating Recipe');
         });
