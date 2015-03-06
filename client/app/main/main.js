@@ -28,9 +28,10 @@ angular.module('cookingBuddy20App')
         url: '/:name',
         controller: 'MainCtrl',
         templateUrl: 'app/main/templates/view.html',
-        onEnter: function(recipeService){
+        onEnter: function(recipeService, dictionService){
           recipeService.getRecipeBasedOnUrl();
           recipeService.startFresh();
+          dictionService.continue = true;
         },
         onExit: function(dictionService){
           dictionService.stopListening();

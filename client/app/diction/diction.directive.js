@@ -47,8 +47,10 @@ angular.module('cookingBuddy20App')
                 };
 
                 var beginRecognition = function() {
-                    dictionService.recognizing = true;
-                    dictionService.recognition.start();
+                    if (dictionService.continue){
+                        dictionService.recognizing = true;
+                        dictionService.recognition.start();
+                    }
                 };
 
                 var changeStepStyling = function(step, color, size) {
@@ -67,7 +69,7 @@ angular.module('cookingBuddy20App')
                 var handleWatchAndListen = function() {
                     scope.$watch(function(scope) { return recipeService.currentStep; },
                         function(newValue, oldValue) {
-                            console.log(oldValue, newValue);
+                            //console.log(oldValue, newValue);
                             if (newValue >= 0 && oldValue < 0){
                                 changeStepStyling(newValue, '#4393B9', '2em');
                             } else if (newValue >= 0 && oldValue >= 0){
@@ -124,11 +126,11 @@ angular.module('cookingBuddy20App')
                     var question = finalTranscript.match(re_3);
                     if (question){
                         for(var j = 0; j < recipeService.currRecipe.ingredients.length; j++){
-                            console.log('ingredients: ' + recipeService.currRecipe.ingredients[j]);
+                            //console.log('ingredients: ' + recipeService.currRecipe.ingredients[j]);
                             if(recipeService.currRecipe.ingredients[j].toLowerCase().indexOf(question[2]) > -1) {
-                                console.log('made it to a question pt 2');
+                                //console.log('made it to a question pt 2');
                                 message = 'You need ' + recipeService.currRecipe.ingredients[j];
-                                console.log(message);
+                                //console.log(message);
                                 break;
                             }
                         }
@@ -140,13 +142,13 @@ angular.module('cookingBuddy20App')
                 var handleMatches = function() {
                     dictionService.actionTaken = 'nothing';
                     if (finalTranscript !== ''){
-                        console.log('CurrentStep: ' + recipeService.currentStep);
-                        console.log('Length: ' + recipeService.currRecipe.steps.length);
-                        console.log(finalTranscript);
+                        //console.log('CurrentStep: ' + recipeService.currentStep);
+                        //console.log('Length: ' + recipeService.currRecipe.steps.length);
+                        //console.log(finalTranscript);
 
                         if (recipeService.currentStep === recipeService.currRecipe.steps.length - 1){
                             finished = true;
-                            console.log('Finished!');
+                            //console.log('Finished!');
                         }
                         if (recipeService.currentStep !== recipeService.currRecipe.steps.length - 1){
                             finished = false;
@@ -166,7 +168,7 @@ angular.module('cookingBuddy20App')
                         //var re = /step/i;
                         var goTo = finalTranscript.match(re);
                         if (goTo){
-                            console.log('matched')
+                            //console.log('matched')
                             if ((goTo[1] -1 >= recipeService.currRecipe.steps.length) || (goTo[1] -1 < 0)) {
                                 message = 'You can\'t go to that step.';
                                 handleUtterance(message);

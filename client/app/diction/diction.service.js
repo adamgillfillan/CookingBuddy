@@ -6,6 +6,7 @@ angular.module('cookingBuddy20App')
   	var service = {};
   	service.recognizing = false;
     service.actionTaken = 'nothing';
+    service.continue = true;
 
   	service.createRecognitionObject = function(){
   		service.recognition = new webkitSpeechRecognition();
@@ -22,10 +23,8 @@ angular.module('cookingBuddy20App')
     };
 
     service.stopListening = function(){
-      if(service.recognizing)
-        service.recognition.stop();
-      // if(service.recognition)
-      // 	service.recognition.stop();
+      if(service.recognizing){ service.recognition.stop(); }
+      service.continue = false;
     	service.recognizing = false;
     };
 
