@@ -30,7 +30,8 @@ var options = {
 };
 // Setup server
 var app = express();
-var server = require('https').createServer(options, app);
+//var server = require('https').createServer(options, app);
+var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
