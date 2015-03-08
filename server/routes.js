@@ -14,19 +14,19 @@ module.exports = function(app) {
     next();
   });
 
-  app.get('*',function(req,res,next){
-    if(req.headers['x-forwarded-proto']!='https'){
-      //res.header("Access-Control-Allow-Origin", "*");
-      //res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      console.log("Https redirect");
-      //res.redirect('https://cookingbuddy.herokuapp.com'+req.url);
-      res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
-
-      //res.redirect(['https://', req.get('Host'), req.url].join(''));
-    else
-      next(); /* Continue to other routes if we're not redirecting */
-  });
+  //app.get('*',function(req,res,next){
+  //  if(req.headers['x-forwarded-proto']!='https'){
+  //    //res.header("Access-Control-Allow-Origin", "*");
+  //    //res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  //    console.log("Https redirect");
+  //    //res.redirect('https://cookingbuddy.herokuapp.com'+req.url);
+  //    res.redirect(['https://', req.get('Host'), req.url].join(''));
+  //  }
+  //
+  //    //res.redirect(['https://', req.get('Host'), req.url].join(''));
+  //  else
+  //    next(); /* Continue to other routes if we're not redirecting */
+  //});
   // Insert routes below
   app.use('/api/recipes', require('./api/recipe'));
   app.use('/api/things', require('./api/thing'));

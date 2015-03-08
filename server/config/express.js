@@ -22,6 +22,21 @@ var mongoose = require('mongoose');
 module.exports = function(app) {
   var env = app.get('env');
 
+  var forceSsl = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+  };
+
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+
+
   app.set('views', config.root + '/server/views');
   app.set('view engine', 'jade');
   app.use(compression());
@@ -41,11 +56,13 @@ module.exports = function(app) {
   }));
 
   if ('production' === env) {
+    app.use(forceSsl);
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     //app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', config.root + '/public');
     app.use(morgan('dev'));
+
   }
 
   if ('development' === env || 'test' === env) {
