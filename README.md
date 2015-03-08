@@ -1,4 +1,5 @@
 # cooking-buddy-mean
-MEAN implementation of CookingBuddy.
+A spoken dialogue cooking assistant.
+Demo: https://cookingbuddy.herokuapp.com/
 
 Using Yeoman generator for scaffolding.
