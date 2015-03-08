@@ -18,9 +18,9 @@ module.exports = function(app) {
     if(req.headers['x-forwarded-proto']!='https'){
       //res.header("Access-Control-Allow-Origin", "*");
       //res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      //console.log("Https redirect");
-      res.redirect(['https://', req.get('Host'), req.url].join(''));
+      console.log("Https redirect");
       //res.redirect('https://cookingbuddy.herokuapp.com'+req.url);
+      res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
 
       //res.redirect(['https://', req.get('Host'), req.url].join(''));
